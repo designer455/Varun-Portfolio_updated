@@ -1,0 +1,62 @@
+# Task List
+
+- [x] Initialize Next.js Project
+- [x] Restore Assets & Merge Folders
+- [x] Install dependencies (Lucide icons, etc.)
+- [x] Create Asset Inventory Script & Run it to generate `src/data/projects.ts`
+- [x] Setup Tailwind CSS theme (dark mode, lime-green colors, layout utilities)
+- [x] Create Components
+  - [x] Navbar
+  - [x] Hero Section
+  - [x] Services Section
+  - [x] Testimonials Section (Removed)
+  - [x] Clients (Rebranded to Websites Worked On Logo Slider)
+  - [x] Contact Form with validation
+  - [x] Footer
+- [x] Layout & Responsiveness Testing (375px, 768px, 1440px)
+- [x] Final Build & Validation
+- [x] Phase 3 updates
+  - [x] Install `yet-another-react-lightbox`
+  - [x] Implement round-robin category interleaving for the "All" tab in `Portfolio.tsx`
+  - [x] Integrate image lightbox with zoom, pan, and navigation in `Portfolio.tsx`
+  - [x] Create `About.tsx` component with profile.pdf details
+  - [x] Register `About` component in `src/app/page.tsx`
+  - [x] Apply alternating background colors across all sections (Hero, About, Clients, Services, Portfolio, Testimonials, Contact, Footer)
+  - [x] Verify build and responsive viewports
+- [x] Phase 4 updates
+  - [x] Remove Testimonials section completely
+  - [x] Rebalance Portfolio "All" tab to show exactly 1 of each category in first 5 slots
+  - [x] Generate vector monogram favicon and export standard sizes via `sips`
+  - [x] Redesign About Me section for layout spacing, hierarchy, and drifting background shapes
+  - [x] Rebrand logo section as "Websites I've Worked On" with infinite scrolling slider linked to live URLs
+  - [x] Incorporate light background pacing sections (Clients, Contact) with high-contrast text colors
+  - [x] Verify Next.js build and browser rendering
+- [x] Phase 5 updates
+  - [x] Integrate exact resume data in `About.tsx` (Headline, location, experience details, education, certifications, and projects list)
+  - [x] Add links/buttons to certifications (Verify Certificate) and projects (Visit Website)
+  - [x] Verify portfolio "All" category interleaving logic & remaining count display in `Portfolio.tsx`
+  - [x] Confirm clients infinite scroll uses brand logos with correct hover colors
+  - [x] Verify Next.js build and responsive viewports
+- [x] Phase 6 updates
+  - [x] Remove `Clients.tsx` import and render block from `src/app/page.tsx` and delete the component file
+  - [x] Update certifications in `About.tsx` to link to local PDFs with the button label "View Certificate"
+  - [x] Add floating graphic drift background elements to Hero, About, Services, Portfolio, Contact
+  - [x] Convert Services component to light background section (`bg-[#f9fafb]`) with high-contrast text and dark green accents
+  - [x] Update Portfolio component background color to `bg-background` (Dark `#030712`)
+  - [x] Verify Next.js build and responsive viewports
+- [x] Phase 7 updates
+  - [x] Implement in-lightbox PDF viewer modal for local certificates in `About.tsx`
+- [x] Phase 8 updates
+  - [x] Update contact email to `c.graphics00@gmail.com`
+  - [x] Update mobile numbers to `8700236209 / 7042616702`
+  - [x] Update LinkedIn URL to `https://www.linkedin.com/in/varun-chauhan-designer/`
+  - [x] Rename project block to "Websites Worked On" and add Digitons and Aiju exports
+- [x] Phase 9 updates
+  - [x] Create `Credentials.tsx` component (Certifications + Websites Worked On) as a Dark section
+  - [x] Update `About.tsx` (remove certifications/projects, change to Light background theme)
+  - [x] Update `Services.tsx` background color to Dark
+  - [x] Update `Portfolio.tsx` background color to Light
+  - [x] Update `page.tsx` to apply new order (Hero, About, Services, Portfolio, Credentials, Contact, Footer)
+  - [x] Verify build and responsive viewports
+- [x] Phase 10 updates
+  - [x] Integrate WhatsApp Redirect on Contact Form submission to WhatsApp number 918700236209
