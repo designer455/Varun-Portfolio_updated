@@ -110,6 +110,23 @@ export default function WhatsAppWidget() {
       };
     }
 
+    if (query.includes("currently working") || query.includes("present job") || query.includes("current company") || query.includes("where do you work now") || query.includes("working now") || query.includes("presently working") || query.includes("current employer")) {
+      return {
+        response: "Varun is currently working as a <b>Graphic and Web Designer at Kairali Ayurvedic Group</b> (since Apr 2023).<br/>" +
+          "His responsibilities include constructing admin panels using HTML/CSS/Bootstrap, managing website front-ends, and designing print and digital social media creatives.",
+        isHtml: true,
+      };
+    }
+
+    if (query.includes("worked earlier") || query.includes("worked before") || query.includes("previous company") || query.includes("past job") || query.includes("previous job") || query.includes("past experience") || query.includes("earlier experience")) {
+      return {
+        response: "Earlier, Varun worked at:<br/>" +
+          "1. <b>Hindon Mercantile Limited</b> as Graphic and Web Designer (Jun 2021 – Mar 2023), where he designed/built front-ends, architecture, server integrations, and trained teams in WordPress.<br/>" +
+          "2. <b>Risezonic LLP</b> as a Technology/IT Intern (Sep 2020 – Feb 2021).",
+        isHtml: true,
+      };
+    }
+
     if (query.includes("social") || query.includes("instagram") || query.includes("rupeecircle") || query.includes("mufin")) {
       return {
         response: "Here are links to Varun's social media designs and corporate graphics:<br/>" +
