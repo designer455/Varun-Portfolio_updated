@@ -62,6 +62,23 @@ export default function WhatsAppWidget() {
       };
     }
 
+    if (query.includes("currently working") || query.includes("present job") || query.includes("current company") || query.includes("where do you work now") || query.includes("working now") || query.includes("presently working") || query.includes("current employer")) {
+      return {
+        response: "Varun is currently working as a <b>Graphic and Web Designer at Kairali Ayurvedic Group</b> (since Apr 2023).<br/>" +
+          "His responsibilities include constructing admin panels using HTML/CSS/Bootstrap, managing website front-ends, and designing print and digital social media creatives.",
+        isHtml: true,
+      };
+    }
+
+    if (query.includes("worked earlier") || query.includes("worked before") || query.includes("previous company") || query.includes("past job") || query.includes("previous job") || query.includes("past experience") || query.includes("earlier experience")) {
+      return {
+        response: "Earlier, Varun worked at:<br/>" +
+          "1. <b>Hindon Mercantile Limited</b> as Graphic and Web Designer (Jun 2021 – Mar 2023), where he designed/built front-ends, architecture, server integrations, and trained teams in WordPress.<br/>" +
+          "2. <b>Risezonic LLP</b> as a Technology/IT Intern (Sep 2020 – Feb 2021).",
+        isHtml: true,
+      };
+    }
+
     if (query.includes("notice") || query.includes("join") || query.includes("available")) {
       return {
         response: "Varun has an official <b>1 Month notice period</b> and is ready to join or transition as required.",
@@ -69,7 +86,7 @@ export default function WhatsAppWidget() {
       };
     }
 
-    if (query.includes("salary") || query.includes("expected") || query.includes("current") || query.includes("ctc") || query.includes("budget")) {
+    if (query.includes("salary") || query.includes("expected") || query.includes("ctc") || query.includes("budget") || (query.includes("current") && !query.includes("work") && !query.includes("job") && !query.includes("company") && !query.includes("employer"))) {
       return {
         response: "Varun's current CTC is <b>₹ 8,31,600 per annum</b>. For detailed discussions about package expectations, please contact him directly.",
         isHtml: true,
@@ -106,23 +123,6 @@ export default function WhatsAppWidget() {
           "• Front-end website design and overall website architecture.<br/>" +
           "• Back-end database and server integration.<br/>" +
           "• Website performance testing and training team members in WordPress.",
-        isHtml: true,
-      };
-    }
-
-    if (query.includes("currently working") || query.includes("present job") || query.includes("current company") || query.includes("where do you work now") || query.includes("working now") || query.includes("presently working") || query.includes("current employer")) {
-      return {
-        response: "Varun is currently working as a <b>Graphic and Web Designer at Kairali Ayurvedic Group</b> (since Apr 2023).<br/>" +
-          "His responsibilities include constructing admin panels using HTML/CSS/Bootstrap, managing website front-ends, and designing print and digital social media creatives.",
-        isHtml: true,
-      };
-    }
-
-    if (query.includes("worked earlier") || query.includes("worked before") || query.includes("previous company") || query.includes("past job") || query.includes("previous job") || query.includes("past experience") || query.includes("earlier experience")) {
-      return {
-        response: "Earlier, Varun worked at:<br/>" +
-          "1. <b>Hindon Mercantile Limited</b> as Graphic and Web Designer (Jun 2021 – Mar 2023), where he designed/built front-ends, architecture, server integrations, and trained teams in WordPress.<br/>" +
-          "2. <b>Risezonic LLP</b> as a Technology/IT Intern (Sep 2020 – Feb 2021).",
         isHtml: true,
       };
     }
