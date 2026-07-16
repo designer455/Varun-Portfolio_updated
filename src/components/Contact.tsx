@@ -72,29 +72,47 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      // Construct WhatsApp message URL
-      const whatsappNumber = "918700236209"; // India country code + 8700236209
-      const text = `Hello Varun,\n\nI want to discuss a project with you.\n\n*Name:* ${formData.fullName}\n*Email:* ${formData.email}\n*Project:* ${formData.projectType}\n*Message:* ${formData.message}`;
-      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
-      
-      // Open WhatsApp Click to Chat
-      window.open(whatsappUrl, "_blank");
 
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({
-        fullName: "",
-        email: "",
-        projectType: "",
-        message: "",
+    try {
+      // Send email query to c.graphics00@gmail.com
+      await fetch("https://formsubmit.co/ajax/c.graphics00@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          Name: formData.fullName,
+          Email: formData.email,
+          "Project Type": formData.projectType,
+          Message: formData.message,
+        })
       });
-    }, 1000);
+    } catch (error) {
+      console.error("Email submission failed:", error);
+    }
+
+    // Construct WhatsApp message URL
+    const whatsappNumber = "918700236209"; // India country code + 8700236209
+    const text = `Hello Varun,\n\nI want to discuss a project with you.\n\n*Name:* ${formData.fullName}\n*Email:* ${formData.email}\n*Project:* ${formData.projectType}\n*Message:* ${formData.message}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+    
+    // Open WhatsApp Click to Chat
+    window.open(whatsappUrl, "_blank");
+
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    setFormData({
+      fullName: "",
+      email: "",
+      projectType: "",
+      message: "",
+    });
   };
 
   return (
