@@ -20,7 +20,7 @@ export default function WhatsAppWidget() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const whatsappNumber = "918700236209";
-  const welcomeMessage = "Hi there! 👋 I am Varun's virtual assistant. Ask me anything about his skills, services, project links, or education!";
+  const welcomeMessage = "Hi there! 👋 I am Varun's virtual assistant. Ask me anything about his skills, services, project links, notice period, or experience!";
 
   useEffect(() => {
     const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
@@ -39,13 +39,74 @@ export default function WhatsAppWidget() {
     }
   }, [messages, isTyping]);
 
-  // Keyword lookup bot responses
+  // Keyword lookup bot responses incorporating ALL PDF info
   const getBotResponse = (userInput: string): { response: string; isHtml?: boolean } => {
     const query = userInput.toLowerCase().trim();
 
-    if (query.includes("skill") || query.includes("tool") || query.includes("design") || query.includes("software")) {
+    if (query.includes("experience") || query.includes("how long") || query.includes("tenure") || query.includes("work history")) {
       return {
-        response: "Varun has 4+ years of experience. Key skills include:<br/>• Corel Draw, Adobe Illustrator & Photoshop<br/>• Web design using HTML, CSS, Bootstrap, & WordPress<br/>• Presentation design using PowerPoint & Excel.",
+        response: "Varun has a total of <b>4 Years & 2 Months</b> of professional experience as a Graphic & Web Designer:<br/>" +
+          "• <b>Kairali Ayurvedic Group</b>: Apr 2023 – Present (3 yrs 4 mos)<br/>" +
+          "• <b>Hindon Mercantile Limited</b>: Jun 2021 – Mar 2023 (1 yr 10 mos)<br/>" +
+          "• <b>Risezonic LLP</b>: Internship (Sep 2020 – Feb 2021).",
+        isHtml: true,
+      };
+    }
+
+    if (query.includes("notice") || query.includes("join") || query.includes("available")) {
+      return {
+        response: "Varun has an official <b>1 Month notice period</b> and is ready to join or transition as required.",
+        isHtml: true,
+      };
+    }
+
+    if (query.includes("salary") || query.includes("expected") || query.includes("current") || query.includes("ctc") || query.includes("budget")) {
+      return {
+        response: "Varun's current CTC is <b>₹ 7,20,000 per annum</b>. For detailed discussions about package expectations, please contact him directly.",
+        isHtml: true,
+      };
+    }
+
+    if (query.includes("skill") || query.includes("tool") || query.includes("design") || query.includes("software") || query.includes("version")) {
+      return {
+        response: "Here is the breakdown of Varun's IT skills and versions:<br/>" +
+          "• <b>Bootstrap</b> (v5) — 4 Years<br/>" +
+          "• <b>HTML</b> (v5) — 4 Years<br/>" +
+          "• <b>WordPress</b> (v6.1) — 4 Years<br/>" +
+          "• <b>Illustrator & Photoshop</b> (v2023) — 4 Years<br/>" +
+          "• <b>Corel Draw</b> (v2024) — 4 Years<br/>" +
+          "• <b>PowerPoint & Word</b> (v2023) — 4 Years<br/>" +
+          "• <b>Excel</b> (v2024) — 3 Years.",
+        isHtml: true,
+      };
+    }
+
+    if (query.includes("kairali") || query.includes("current job") || query.includes("responsibilit")) {
+      return {
+        response: "At <b>Kairali Ayurvedic Group</b> (Current), Varun's responsibilities include:<br/>" +
+          "• Constructing admin panels using HTML, CSS, and Bootstrap.<br/>" +
+          "• Managing the front end of the company website.<br/>" +
+          "• Designing digital creatives for social media, marketing campaigns, and print media layouts.",
+        isHtml: true,
+      };
+    }
+
+    if (query.includes("hindon") || query.includes("previous job")) {
+      return {
+        response: "At <b>Hindon Mercantile Limited</b>, Varun managed:<br/>" +
+          "• Front-end website design and overall website architecture.<br/>" +
+          "• Back-end database and server integration.<br/>" +
+          "• Website performance testing and training team members in WordPress.",
+        isHtml: true,
+      };
+    }
+
+    if (query.includes("social") || query.includes("instagram") || query.includes("rupeecircle") || query.includes("mufin")) {
+      return {
+        response: "Here are links to Varun's social media designs and corporate graphics:<br/>" +
+          "• Rupeecircle: <a href='https://instagram.com/rupeecircle?igshid=Yzg5MTU1MDY=' target='_blank' class='text-accent underline font-semibold'>Instagram creatives</a><br/>" +
+          "• Bimapay LinkedIn: <a href='https://www.linkedin.com/company/bimapay/' target='_blank' class='text-accent underline font-semibold'>Bimapay Page</a><br/>" +
+          "• Mufin Finance LinkedIn: <a href='https://www.linkedin.com/company/mufin-finance/' target='_blank' class='text-accent underline font-semibold'>Mufin Page</a>",
         isHtml: true,
       };
     }
@@ -65,19 +126,12 @@ export default function WhatsAppWidget() {
       };
     }
 
-    if (query.includes("contact") || query.includes("phone") || query.includes("email") || query.includes("whatsapp") || query.includes("number") || query.includes("call")) {
+    if (query.includes("contact") || query.includes("phone") || query.includes("email") || query.includes("number") || query.includes("call")) {
       return {
         response: "You can reach Varun directly:<br/>" +
           "• Email: <a href='mailto:c.graphics00@gmail.com' class='text-accent underline font-semibold'>c.graphics00@gmail.com</a><br/>" +
           "• Phone: +91 87002 36209 / 70426 16702<br/>" +
           "• LinkedIn: <a href='https://www.linkedin.com/in/varun-chauhan-designer/' target='_blank' class='text-accent underline font-semibold'>varun-chauhan-designer</a>",
-        isHtml: true,
-      };
-    }
-
-    if (query.includes("service") || query.includes("offer") || query.includes("how can you help")) {
-      return {
-        response: "Varun offers:<br/>1. 🚀 Website & UI/UX designs (Landing pages, WordPress setups)<br/>2. 🎨 Print & brand designs (brochures, magazines, banners)<br/>3. 📧 Digital marketing and emailer campaign layouts.",
         isHtml: true,
       };
     }
@@ -91,13 +145,13 @@ export default function WhatsAppWidget() {
 
     if (query.includes("certif")) {
       return {
-        response: "Varun is an Adobe Certified Associate in Illustrator, InDesign, and Premiere Pro. He also holds front-end certifications from Great Learning Academy.",
-        isHtml: false,
+        response: "Varun holds certifications in:<br/>• Adobe Certified Associate (Illustrator, InDesign, Premiere Pro)<br/>• Front End Development - HTML (Great Learning Academy)<br/>• MAAC APDMD.",
+        isHtml: true,
       };
     }
 
     return {
-      response: "I'm here to help! Ask me about: 'skills', 'projects', 'services', 'contact details', or 'education'. You can also click the button below to open a direct WhatsApp chat with Varun.",
+      response: "I'm here to help! Ask me about: 'experience', 'notice period', 'salary', 'skills', 'responsibilities', 'projects', 'social media', or 'education'. You can also click the button below to message Varun directly on WhatsApp.",
       isHtml: false,
     };
   };
@@ -139,19 +193,25 @@ export default function WhatsAppWidget() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 font-sans">
-      {/* Floating Toggle Button */}
+      {/* Floating Toggle Button (Uses the SVG 4015765_195.svg as trigger) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 group relative z-50 cursor-pointer"
+        className="w-14 h-14 rounded-full bg-zinc-950 border border-zinc-800 text-white flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 group relative z-50 cursor-pointer overflow-hidden"
         aria-label="Open Chatbot"
       >
-        <span className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping pointer-events-none" />
+        <span className="absolute inset-0 rounded-full bg-accent/10 animate-ping pointer-events-none" />
         {isOpen ? (
-          <X size={24} className="transition-transform duration-300 rotate-90" />
+          <X size={24} className="transition-transform duration-300 rotate-90 text-white" />
         ) : (
-          <svg className="w-7 h-7 fill-current transition-transform duration-300 group-hover:rotate-6" viewBox="0 0 24 24">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.864-9.864.002-2.637-1.023-5.116-2.887-6.98-1.864-1.865-4.343-2.89-6.982-2.892-5.445 0-9.869 4.42-9.873 9.864-.001 1.73.454 3.42 1.316 4.922L1.84 21.16l4.807-1.26z" />
-          </svg>
+          <div className="relative w-10 h-10">
+            <Image
+              src="/assets/4015765_195.svg"
+              alt="Assistant Bot Trigger"
+              fill
+              className="object-contain p-1"
+              priority
+            />
+          </div>
         )}
       </button>
 
@@ -163,10 +223,10 @@ export default function WhatsAppWidget() {
           <div className="bg-[#075e54] p-4 text-white flex items-center gap-3">
             <div className="relative w-10 h-10 rounded-full overflow-hidden border border-emerald-400 bg-zinc-900 shrink-0">
               <Image
-                src="/assets/4015765_195.svg"
+                src="/assets/updated profile.jpeg"
                 alt="Varun Chauhan Profile"
                 fill
-                className="object-contain p-1"
+                className="object-cover"
               />
             </div>
             <div>
@@ -214,24 +274,30 @@ export default function WhatsAppWidget() {
 
           {/* Quick Action Options */}
           {showOptions && (
-            <div className="px-3 py-2 bg-zinc-950 border-t border-zinc-850 flex flex-wrap gap-1.5 shrink-0 justify-center">
+            <div className="px-3 py-2 bg-zinc-955 border-t border-zinc-850 flex flex-wrap gap-1.5 shrink-0 justify-center">
+              <button
+                onClick={() => handleSendMessage("What is your experience?")}
+                className="px-2.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 text-[10px] font-bold text-white uppercase tracking-wider transition-colors cursor-pointer"
+              >
+                💼 Experience
+              </button>
+              <button
+                onClick={() => handleSendMessage("What is your notice period?")}
+                className="px-2.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 text-[10px] font-bold text-white uppercase tracking-wider transition-colors cursor-pointer"
+              >
+                ⏳ Notice Period
+              </button>
+              <button
+                onClick={() => handleSendMessage("Show me project links")}
+                className="px-2.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 text-[10px] font-bold text-white uppercase tracking-wider transition-colors cursor-pointer"
+              >
+                📁 Projects
+              </button>
               <button
                 onClick={() => handleSendMessage("What are your skills?")}
                 className="px-2.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 text-[10px] font-bold text-white uppercase tracking-wider transition-colors cursor-pointer"
               >
                 🛠 Skills
-              </button>
-              <button
-                onClick={() => handleSendMessage("Show me project links")}
-                className="px-2.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-855 border border-zinc-800 text-[10px] font-bold text-white uppercase tracking-wider transition-colors cursor-pointer"
-              >
-                📁 Projects
-              </button>
-              <button
-                onClick={() => handleSendMessage("How can I contact you?")}
-                className="px-2.5 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-855 border border-zinc-800 text-[10px] font-bold text-white uppercase tracking-wider transition-colors cursor-pointer"
-              >
-                📞 Contact
               </button>
             </div>
           )}
@@ -261,7 +327,7 @@ export default function WhatsAppWidget() {
               type="text"
               value={customInput}
               onChange={(e) => setCustomInput(e.target.value)}
-              placeholder="Ask about skills, projects, contact..."
+              placeholder="Ask about skills, projects, notice period..."
               className="flex-1 bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-accent text-[11px]"
             />
             <button
