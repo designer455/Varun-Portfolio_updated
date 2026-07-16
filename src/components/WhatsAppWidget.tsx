@@ -163,10 +163,10 @@ export default function WhatsAppWidget() {
           <div className="bg-[#075e54] p-4 text-white flex items-center gap-3">
             <div className="relative w-10 h-10 rounded-full overflow-hidden border border-emerald-400 bg-zinc-900 shrink-0">
               <Image
-                src="/assets/updated profile.jpeg"
+                src="/assets/4015765_195.svg"
                 alt="Varun Chauhan Profile"
                 fill
-                className="object-cover"
+                className="object-contain p-1"
               />
             </div>
             <div>
