@@ -62,7 +62,7 @@ export default function WhatsAppWidget() {
 
     if (query.includes("salary") || query.includes("expected") || query.includes("current") || query.includes("ctc") || query.includes("budget")) {
       return {
-        response: "Varun's current CTC is <b>₹ 7,20,000 per annum</b>. For detailed discussions about package expectations, please contact him directly.",
+        response: "Varun's current CTC is <b>₹ 8,31,600 per annum</b>. For detailed discussions about package expectations, please contact him directly.",
         isHtml: true,
       };
     }
@@ -107,6 +107,19 @@ export default function WhatsAppWidget() {
           "• Rupeecircle: <a href='https://instagram.com/rupeecircle?igshid=Yzg5MTU1MDY=' target='_blank' class='text-accent underline font-semibold'>Instagram creatives</a><br/>" +
           "• Bimapay LinkedIn: <a href='https://www.linkedin.com/company/bimapay/' target='_blank' class='text-accent underline font-semibold'>Bimapay Page</a><br/>" +
           "• Mufin Finance LinkedIn: <a href='https://www.linkedin.com/company/mufin-finance/' target='_blank' class='text-accent underline font-semibold'>Mufin Page</a>",
+        isHtml: true,
+      };
+    }
+
+    if (query.includes("portfolio") || query.includes("creative") || query.includes("design") || query.includes("category") || query.includes("sample")) {
+      return {
+        response: "Varun's portfolio showcases <b>114 unique professional design projects</b> across 5 categories:<br/>" +
+          "1. 🌐 <b>Website & Landing Pages</b> (1 feature project)<br/>" +
+          "2. ✉️ <b>Email Campaigns</b> (6 emailer layouts)<br/>" +
+          "3. 📖 <b>Magazine Advertisements</b> (12 ads)<br/>" +
+          "4. 📦 <b>Print Media & Branding</b> (30 catalog booklets, brochures, stationery)<br/>" +
+          "5. 📱 <b>Social Media Creatives</b> (65 marketing assets for Rupeecircle, Bimapay, Mufin).<br/>" +
+          "You can filter and view them directly in the <b>Recent Portfolio</b> section of the page!",
         isHtml: true,
       };
     }
@@ -199,14 +212,14 @@ export default function WhatsAppWidget() {
         className={`transition-all duration-300 hover:scale-115 active:scale-90 group relative z-50 cursor-pointer flex items-center justify-center ${
           isOpen
             ? "w-14 h-14 rounded-full bg-zinc-950 border border-zinc-850 shadow-xl text-white"
-            : "w-20 h-20 bg-transparent"
+            : "w-24 h-24 bg-transparent"
         }`}
         aria-label="Open Chatbot"
       >
         {isOpen ? (
           <X size={24} className="transition-transform duration-300 rotate-90" />
         ) : (
-          <div className="relative w-20 h-20 drop-shadow-2xl">
+          <div className="relative w-24 h-24 drop-shadow-2xl">
             <span className="absolute inset-2 rounded-full bg-emerald-400/20 animate-ping pointer-events-none" />
             <Image
               src="/assets/4015765_195.svg"
