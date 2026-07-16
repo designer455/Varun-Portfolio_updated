@@ -53,6 +53,15 @@ export default function WhatsAppWidget() {
       };
     }
 
+    if (query.includes("about") || query.includes("who are you") || query.includes("bio") || query.includes("profile") || query.includes("summary") || query.includes("biography")) {
+      return {
+        response: "<b>Varun Chauhan</b> is a Senior Graphic & Web Designer (including WordPress) based in New Delhi, India.<br/>" +
+          "He has 4+ years of professional experience, specializing in brand design, print publications, and website layout architecture.<br/>" +
+          "Ask me about his: 'experience', 'skills', 'notice period', 'salary', 'projects', or 'education'!",
+        isHtml: true,
+      };
+    }
+
     if (query.includes("notice") || query.includes("join") || query.includes("available")) {
       return {
         response: "Varun has an official <b>1 Month notice period</b> and is ready to join or transition as required.",
