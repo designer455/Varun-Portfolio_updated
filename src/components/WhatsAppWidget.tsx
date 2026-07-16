@@ -193,22 +193,26 @@ export default function WhatsAppWidget() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 font-sans">
-      {/* Floating Toggle Button (Uses the SVG 4015765_195.svg as trigger) */}
+      {/* Floating Toggle Button (Displays large mascot without circle when closed) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-zinc-950 border border-zinc-800 text-white flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 group relative z-50 cursor-pointer overflow-hidden"
+        className={`transition-all duration-300 hover:scale-115 active:scale-90 group relative z-50 cursor-pointer flex items-center justify-center ${
+          isOpen
+            ? "w-14 h-14 rounded-full bg-zinc-950 border border-zinc-850 shadow-xl text-white"
+            : "w-20 h-20 bg-transparent"
+        }`}
         aria-label="Open Chatbot"
       >
-        <span className="absolute inset-0 rounded-full bg-accent/10 animate-ping pointer-events-none" />
         {isOpen ? (
-          <X size={24} className="transition-transform duration-300 rotate-90 text-white" />
+          <X size={24} className="transition-transform duration-300 rotate-90" />
         ) : (
-          <div className="relative w-10 h-10">
+          <div className="relative w-20 h-20 drop-shadow-2xl">
+            <span className="absolute inset-2 rounded-full bg-emerald-400/20 animate-ping pointer-events-none" />
             <Image
               src="/assets/4015765_195.svg"
               alt="Assistant Bot Trigger"
               fill
-              className="object-contain p-1"
+              className="object-contain animate-bounce"
               priority
             />
           </div>
