@@ -230,20 +230,21 @@ export default function CharacterCanvas({ className = "", onStateChange }: Chara
   }, [onStateChange]);
 
   return (
-    <div className={`relative w-screen h-screen overflow-hidden ${className}`}>
+    <div className={`relative w-full h-full overflow-hidden ${className}`}>
       {/* 
         CRITICAL CONSTRAINTS MAINTAINED:
         1. NO CSS 3D TRANSFORMS (no perspective, rotateX, rotateY).
         2. Rock-solid motionless canvas.
-        3. Proportional height (~84vh, max-h-[820px]) anchored to bottom so the character is
-           naturally proportioned without dominating or clipping the viewport.
+        3. Responsive sizing:
+           - On mobile: Fits naturally in remaining lower space below header & text
+           - On desktop: Bottom-anchored proportioned character (~85vh, max-h-[820px])
       */}
       <div className="absolute inset-0 flex items-end justify-center pointer-events-none">
         <canvas
           ref={canvasRef}
           width={1280}
           height={720}
-          className="h-[78vh] sm:h-[82vh] md:h-[85vh] max-h-[820px] w-auto max-w-full aspect-[16/9] object-contain object-bottom select-none pointer-events-none block"
+          className="h-full w-full object-contain object-bottom select-none pointer-events-none block md:h-[85vh] md:max-h-[820px] md:w-auto md:aspect-[16/9]"
           style={{
             backgroundColor: "transparent",
           }}
