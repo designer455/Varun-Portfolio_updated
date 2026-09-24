@@ -1,83 +1,110 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowUpRight, Download } from "lucide-react";
+import React, { useState } from "react";
+import { ArrowUpRight, Eye, Compass } from "lucide-react";
+import CharacterCanvas from "./CharacterCanvas";
 
 export default function Hero() {
+  const [trackerState, setTrackerState] = useState<{
+    isCenter: boolean;
+    angleDeg: number;
+    direction: string;
+  }>({
+    isCenter: true,
+    angleDeg: 0,
+    direction: "CENTER",
+  });
+
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-900 via-background to-background"
+      className="relative w-screen h-screen overflow-hidden select-none"
+      style={{
+        backgroundColor: "#030712",
+      }}
     >
-      {/* Decorative Grid Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293710_1px,transparent_1px),linear-gradient(to_bottom,#1f293710_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
+      {/* 
+        CRITICAL CONSTRAINT 1: Full-Screen Motionless Canvas
+        100vw, 100vh, object-fit: cover
+        NO CSS 3D transforms (no perspective, rotateX, rotateY).
+      */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none">
+        <CharacterCanvas onStateChange={setTrackerState} />
+      </div>
 
-      {/* Decorative Blur Shapes */}
-      <div className="absolute top-1/4 left-1/10 w-72 h-72 bg-accent/5 rounded-full blur-3xl pointer-events-none animate-drift-slow" />
-      <div className="absolute bottom-1/4 right-1/10 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none animate-drift-medium" />
+      {/* Subtle Studio Ambient Gradient (seamless on #DD140E) */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.06)_0%,transparent_60%)] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-        {/* Text Content */}
-        <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold uppercase tracking-wider mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            Available for Freelance & Full-time
-          </div>
+      {/* Hero Typography & Interactive Controls (Bottom-Left) */}
+      <div className="absolute bottom-8 sm:bottom-12 left-6 sm:left-12 md:left-16 z-20 flex flex-col items-start pointer-events-auto">
+        {/* "Hi, I'm" in clean, spaced modern sans-serif */}
+        <span className="text-xs sm:text-sm font-sans tracking-[0.35em] uppercase text-white/80 font-medium mb-1 drop-shadow-sm">
+          Hi, I'm
+        </span>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-black font-display tracking-tight text-white uppercase leading-[0.95] mb-6">
-            DESIGNING <br className="hidden sm:inline" />
-            <span className="text-gradient">BRANDS &</span> <br />
-            EXPERIENCES
-          </h1>
+        {/* Name in large, elegant cursive script (Dancing Script) with subtle soft drop shadow */}
+        <h1
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-cursive text-white leading-[1.05] mb-4 select-none"
+          style={{
+            textShadow: "0 8px 24px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.35)",
+          }}
+        >
+          Varun Chauhan
+        </h1>
 
-          <p className="text-lg md:text-xl text-text-muted max-w-xl mb-8 leading-relaxed">
-            I am <span className="text-white font-semibold">Varun Chauhan</span>, a Senior Graphic & Web Designer.
-            I turn complex brand concepts into stunning website interfaces, print media, and social creatives.
-          </p>
+        {/* Compact bio about Varun Chauhan (max-width ~360px) */}
+        <p className="max-w-[360px] text-xs sm:text-sm text-white/90 leading-relaxed font-sans mb-6 font-normal drop-shadow-sm">
+          I am Varun Chauhan, a Senior Graphic &amp; Web Designer. I turn complex brand concepts into stunning website interfaces, print media, and social creatives.
+        </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-            <a
-              href="#contact"
-              className="group flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-full bg-accent text-background font-bold uppercase tracking-wider hover:bg-accent-hover transition-all duration-200"
-            >
-              Let's Talk
-              <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </a>
+        {/* Two stylish white pill buttons: Resume and Let's Talk */}
+        <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
+          {/* Resume: Solid White Pill with Arrow Icon */}
+          <a
+            href="/CV-Varun_Chauhan.pdf"
+            download
+            className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 rounded-full bg-white text-black font-semibold text-xs sm:text-sm tracking-wider uppercase hover:bg-white/90 hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_8px_25px_rgba(0,0,0,0.25)]"
+          >
+            <span>Resume</span>
+            <ArrowUpRight
+              size={16}
+              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </a>
 
-            <a
-              href="/CV-Varun_Chauhan.pdf"
-              download
-              className="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 rounded-full border border-border-dark text-white font-bold uppercase tracking-wider hover:bg-white/5 transition-all duration-200"
-            >
-              Download CV
-              <Download size={18} />
-            </a>
-          </div>
-        </div>
-
-        {/* Profile Image Column */}
-        <div className="lg:col-span-5 flex justify-center items-center">
-          <div className="relative group">
-            {/* Outline box */}
-            <div className="absolute -inset-3 rounded-2xl border-2 border-dashed border-accent/30 group-hover:border-accent/80 transition-colors duration-500 pointer-events-none" />
-
-            {/* Glowing Accent behind image */}
-            <div className="absolute inset-0 bg-accent/20 rounded-2xl blur-xl group-hover:bg-accent/30 transition-all duration-500 scale-95 pointer-events-none" />
-
-            {/* Image Container */}
-            <div className="relative w-[300px] h-[360px] sm:w-[350px] sm:h-[420px] rounded-2xl overflow-hidden bg-bg-card border border-border-dark aspect-[3/4]">
-              <Image
-                src="/assets/updated profile.jpeg"
-                alt="Varun Chauhan Profile"
-                fill
-                priority
-                sizes="(max-w-768px) 300px, 350px"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-          </div>
+          {/* Let's Talk: Frosted Glass / White Border Pill */}
+          <a
+            href="#contact"
+            className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 rounded-full bg-white/10 backdrop-blur-[20px] border border-white/40 text-white font-semibold text-xs sm:text-sm tracking-wider uppercase hover:bg-white hover:text-black hover:border-white active:scale-95 transition-all duration-300 shadow-[0_8px_25px_rgba(0,0,0,0.15)]"
+            style={{
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+            }}
+          >
+            <span>Let's Talk</span>
+          </a>
         </div>
       </div>
+
+      {/* Subtle Live Tracking Telemetry HUD (Bottom-Right) */}
+      <div className="absolute bottom-8 right-6 sm:right-12 z-20 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/20 backdrop-blur-md border border-white/15 text-white/80 text-[11px] font-mono tracking-wider shadow-lg">
+        {trackerState.isCenter ? (
+          <>
+            <Eye size={13} className="text-[#ccff00] animate-pulse" />
+            <span className="text-[#ccff00] font-semibold">EYE CONTACT</span>
+          </>
+        ) : (
+          <>
+            <Compass size={13} className="text-white/70" />
+            <span>
+              {trackerState.direction} ({trackerState.angleDeg}°)
+            </span>
+          </>
+        )}
+      </div>
+
+      {/* Bottom Fade Gradient into dark theme sections (#030712) */}
+      <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-b from-transparent via-[#030712]/60 to-[#030712] pointer-events-none z-10" />
     </section>
   );
 }

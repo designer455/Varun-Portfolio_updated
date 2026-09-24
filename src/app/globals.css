@@ -11,6 +11,11 @@
   --color-bg-card-hover: #161d2f;
   --color-border-dark: #1f2937;
   --color-text-muted: #9ca3af;
+  --font-cursive: var(--font-cursive);
+}
+
+.font-cursive {
+  font-family: var(--font-cursive), "Dancing Script", cursive;
 }
 
 body {

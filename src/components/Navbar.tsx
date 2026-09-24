@@ -1,104 +1,72 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import React, { useState, useEffect } from "react";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("work");
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const navItems = [
+    { label: "[WORK]", href: "#portfolio", id: "portfolio" },
+    { label: "[ABOUT]", href: "#about", id: "about" },
+    { label: "[CONTACT]", href: "#contact", id: "contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 50);
+
+      const scrollPos = window.scrollY + 200;
+      const sections = ["portfolio", "about", "contact"];
+      for (const s of sections) {
+        const el = document.getElementById(s);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(s);
+            break;
+          }
+        }
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Portfolio", href: "#portfolio" },
-    { name: "Credentials", href: "#credentials" },
-    { name: "Contact", href: "#contact" },
-  ];
-
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled || isOpen
-          ? "bg-[#030712]/95 backdrop-blur-md border-b border-border-dark py-4"
-          : "bg-transparent py-6"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between relative z-50">
-        {/* Logo */}
-        <a href="#home" className="flex items-center gap-2 group">
-          <span className="text-xl font-bold tracking-wider font-display uppercase text-white">
-            VARUN<span className="text-accent transition-colors group-hover:text-accent-hover">.</span>CHAUHAN
-          </span>
-        </a>
-
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium tracking-wide text-text-muted hover:text-accent transition-colors duration-200 uppercase"
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
-
-        {/* CTA Button */}
-        <div className="hidden md:block">
-          <a
-            href="#contact"
-            className="px-6 py-2.5 rounded-full bg-accent text-background font-semibold text-sm uppercase tracking-wider hover:bg-accent-hover transition-colors duration-200"
-          >
-            Hire Me
-          </a>
-        </div>
-
-        {/* Mobile Toggle */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-white hover:text-accent transition-colors z-50 relative p-2"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {/* Mobile Drawer */}
-      <div
-        className={`fixed inset-0 w-screen h-screen bg-[#030712] z-40 transition-transform duration-300 md:hidden flex flex-col items-center justify-center gap-8 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-auto max-w-full px-4">
+      {/* 
+        Obsidian dark frosted capsule:
+        Guarantees 100% crisp, bold legibility over both dark hero and white body sections.
+      */}
+      <nav
+        className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 rounded-full transition-all duration-300 shadow-[0_12px_36px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.15)]"
+        style={{
+          backgroundColor: "rgba(9, 13, 22, 0.94)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          border: "1px solid rgba(255, 255, 255, 0.18)",
+        }}
       >
-        <div className="flex flex-col items-center gap-6 mt-16">
-          {navLinks.map((link) => (
+        {navItems.map((item) => {
+          const isActive = activeSection === item.id;
+          return (
             <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="text-2xl font-bold font-display uppercase tracking-widest text-text-muted hover:text-accent transition-colors duration-200"
+              key={item.label}
+              href={item.href}
+              className={`relative px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-mono tracking-widest uppercase transition-all duration-200 font-semibold cursor-pointer ${
+                isActive
+                  ? "bg-white text-black shadow-[0_2px_10px_rgba(255,255,255,0.3)]"
+                  : "text-zinc-300 hover:text-white hover:bg-white/10"
+              }`}
             >
-              {link.name}
+              {item.label}
             </a>
-          ))}
-          <a
-            href="#contact"
-            onClick={() => setIsOpen(false)}
-            className="px-8 py-3 rounded-full bg-accent text-background font-bold uppercase tracking-wider hover:bg-accent-hover transition-colors duration-200 mt-4"
-          >
-            Hire Me
-          </a>
-        </div>
-      </div>
-    </nav>
+          );
+        })}
+      </nav>
+    </header>
   );
 }

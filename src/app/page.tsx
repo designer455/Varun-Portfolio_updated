@@ -7,10 +7,12 @@ import Credentials from "@/components/Credentials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
+import CustomCursor from "@/components/CustomCursor";
 
 export default function Home() {
   return (
     <>
+      <CustomCursor />
       <Navbar />
       <main className="flex-1">
         <Hero />

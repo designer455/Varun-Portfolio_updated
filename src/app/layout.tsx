@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Outfit, Dancing_Script } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -12,9 +12,15 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
+const dancingScript = Dancing_Script({
+  variable: "--font-cursive",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "Varun Chauhan | Senior Graphic & Web Designer Portfolio",
-  description: "Explore the professional portfolio of Varun Chauhan. Custom landing pages, brand identities, email campaigns, magazine ads, and high-impact print designs.",
+  title: "Lohitha | Full Stack Developer & Designer Portfolio",
+  description: "Explore the portfolio of Lohitha. Architecting scalable full stack applications and fluid interactive digital products.",
   metadataBase: new URL("https://varunchauhan.design"),
 };
 
@@ -26,7 +32,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable} h-full scroll-smooth antialiased`}
+      className={`${inter.variable} ${outfit.variable} ${dancingScript.variable} h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full bg-background text-foreground flex flex-col">
         {children}
