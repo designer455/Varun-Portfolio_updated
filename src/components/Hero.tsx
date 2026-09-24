@@ -18,7 +18,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative w-screen h-screen overflow-hidden select-none bg-black flex flex-col justify-between md:block"
+      className="relative w-full h-[100dvh] min-h-[100dvh] md:h-screen md:min-h-0 overflow-hidden select-none bg-black flex flex-col justify-between md:block"
     >
       {/* 
         CRITICAL CONSTRAINT 1: Motionless Canvas
