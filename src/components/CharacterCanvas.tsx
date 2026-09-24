@@ -87,14 +87,35 @@ export default function CharacterCanvas({ className = "", onStateChange }: Chara
     };
   }, []);
 
-  // Viewport-wide cursor tracking
+  // Initial entrance greeting & cursor tracking
+  const hasInteractedRef = useRef<boolean>(false);
+  const initialPosRef = useRef<{ x: number; y: number } | null>(null);
+
   useEffect(() => {
+    // 1.2s entrance grace period: hold direct eye contact greeting
+    const timer = setTimeout(() => {
+      hasInteractedRef.current = true;
+    }, 1200);
+
     const handlePointerMove = (e: MouseEvent | PointerEvent) => {
+      if (!initialPosRef.current) {
+        initialPosRef.current = { x: e.clientX, y: e.clientY };
+        return;
+      }
+      // If user moves mouse noticeably (> 20px), unlock tracking
+      const dist = Math.hypot(
+        e.clientX - initialPosRef.current.x,
+        e.clientY - initialPosRef.current.y
+      );
+      if (dist > 20) {
+        hasInteractedRef.current = true;
+      }
       mousePosRef.current = { x: e.clientX, y: e.clientY };
     };
 
     const handleTouchMove = (e: TouchEvent) => {
       if (e.touches.length > 0) {
+        hasInteractedRef.current = true;
         mousePosRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
       }
     };
@@ -104,13 +125,14 @@ export default function CharacterCanvas({ className = "", onStateChange }: Chara
       mousePosRef.current = null;
     };
 
-    window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("pointermove", handlePointerMove, { passive: true, capture: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true, capture: true });
     window.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("touchmove", handleTouchMove);
+      clearTimeout(timer);
+      window.removeEventListener("pointermove", handlePointerMove, { capture: true });
+      window.removeEventListener("touchmove", handleTouchMove, { capture: true });
       window.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
@@ -127,29 +149,19 @@ export default function CharacterCanvas({ className = "", onStateChange }: Chara
     let lastIsCenter = true;
 
     const render = () => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      const screenAR = w / h;
-      const videoAR = 1280 / 720;
+      const currentCanvas = canvasRef.current;
+      if (!currentCanvas) return;
 
-      // In full-screen object-cover mode:
-      // Character is centered horizontally (x = 50% of viewport)
-      const faceCenterX = w * 0.5;
-
-      // Vertical position of face center in video (y = 270 in 720p height)
-      let faceCenterY: number;
-      if (screenAR > videoAR) {
-        const renderedH = w / videoAR;
-        const offsetY = (h - renderedH) / 2;
-        faceCenterY = offsetY + (270 / 720) * renderedH;
-      } else {
-        faceCenterY = (270 / 720) * h;
-      }
+      // Dynamic bounding box of the rendered character on screen
+      const rect = currentCanvas.getBoundingClientRect();
+      const faceCenterX = rect.left + rect.width * 0.5;
+      const faceCenterY = rect.top + rect.height * (270 / 720);
 
       let isCenter = false;
       let targetAngle = currentAngleRef.current;
 
-      if (!mousePosRef.current) {
+      // On initial portfolio load, hold confident direct eye contact
+      if (!hasInteractedRef.current || !mousePosRef.current) {
         isCenter = true;
       } else {
         const dx = mousePosRef.current.x - faceCenterX;
@@ -162,10 +174,8 @@ export default function CharacterCanvas({ className = "", onStateChange }: Chara
         if (rawAngle < 0) rawAngle += 2 * Math.PI;
         targetAngle = rawAngle;
 
-        // Tight ~5.5% screen radius deadzone focused right on eyes/nose
-        // So moving cursor upwards towards the navbar immediately triggers the UP gaze
-        const screenRadius = Math.min(w, h);
-        const deadzoneRadius = screenRadius * 0.055;
+        // Focused deadzone (~6.5% of canvas height) right on the eyes/nose bridge
+        const deadzoneRadius = rect.height * 0.065;
 
         if (dist < deadzoneRadius) {
           isCenter = true;
@@ -224,21 +234,24 @@ export default function CharacterCanvas({ className = "", onStateChange }: Chara
       {/* 
         CRITICAL CONSTRAINTS MAINTAINED:
         1. NO CSS 3D TRANSFORMS (no perspective, rotateX, rotateY).
-        2. Rock-solid motionless canvas (100vw, 100vh, object-fit: cover).
-        3. Seamless background matching #DD140E.
+        2. Rock-solid motionless canvas.
+        3. Proportional height (~84vh, max-h-[820px]) anchored to bottom so the character is
+           naturally proportioned without dominating or clipping the viewport.
       */}
-      <canvas
-        ref={canvasRef}
-        width={1280}
-        height={720}
-        className="w-full h-full object-cover select-none pointer-events-none block"
-        style={{
-          backgroundColor: "#030712",
-        }}
-      />
+      <div className="absolute inset-0 flex items-end justify-center pointer-events-none">
+        <canvas
+          ref={canvasRef}
+          width={1280}
+          height={720}
+          className="h-[78vh] sm:h-[82vh] md:h-[85vh] max-h-[820px] w-auto max-w-full aspect-[16/9] object-contain object-bottom select-none pointer-events-none block"
+          style={{
+            backgroundColor: "transparent",
+          }}
+        />
+      </div>
 
       {!isLoaded && (
-        <div className="absolute inset-0 bg-[#030712] flex flex-col items-center justify-center text-white/80 pointer-events-none transition-opacity duration-300 z-10">
+        <div className="absolute inset-0 bg-black flex flex-col items-center justify-center text-white/80 pointer-events-none transition-opacity duration-300 z-10">
           <div className="w-10 h-10 rounded-full border-2 border-white/20 border-t-white animate-spin mb-3" />
           <p className="text-xs uppercase tracking-widest font-mono text-white/70">
             Loading Vision {loadProgress}%

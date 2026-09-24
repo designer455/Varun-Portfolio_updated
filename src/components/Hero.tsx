@@ -20,7 +20,7 @@ export default function Hero() {
       id="home"
       className="relative w-screen h-screen overflow-hidden select-none"
       style={{
-        backgroundColor: "#030712",
+        backgroundColor: "#000000",
       }}
     >
       {/* 

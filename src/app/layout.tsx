@@ -15,12 +15,11 @@ const outfit = Outfit({
 const dancingScript = Dancing_Script({
   variable: "--font-cursive",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Lohitha | Full Stack Developer & Designer Portfolio",
-  description: "Explore the portfolio of Lohitha. Architecting scalable full stack applications and fluid interactive digital products.",
+  title: "Varun Chauhan | Senior Graphic & Web Designer Portfolio",
+  description: "Explore the portfolio of Varun Chauhan, Senior Graphic & Web Designer. Turning complex brand concepts into stunning website interfaces, print media, and social creatives.",
   metadataBase: new URL("https://varunchauhan.design"),
 };
 
