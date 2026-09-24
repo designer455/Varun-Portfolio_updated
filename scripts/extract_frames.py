@@ -41,7 +41,7 @@ keyframes = [
     (64, 144),   # DOWN (180°)
     (80, 174),   # DOWN-LEFT (225°)
     (96, 204),   # LEFT (270°)
-    (112, 222),  # UP-LEFT (315°)
+    (112, 216),  # UP-LEFT (315°)
 ]
 
 selected = {}
@@ -52,8 +52,8 @@ for i in range(7):
         t = (step - s_idx) / (e_idx - s_idx)
         selected[step] = int(round(s_f + t * (e_f - s_f)))
 
-# Smooth trajectory closure from 112 (F222) back to 128 (F61)
-closure = [222, 223, 224, 225, 45, 47, 49, 51, 53, 55, 57, 58, 59, 60, 61, 61]
+# Seamless natural trajectory closure from 112 (F216, UP-LEFT) back to 128 (F61, UP)
+closure = [216, 219, 222, 225, 228, 232, 236, 239, 10, 16, 22, 28, 32, 56, 59, 61]
 for offset, f in enumerate(closure):
     selected[112 + offset] = f
 

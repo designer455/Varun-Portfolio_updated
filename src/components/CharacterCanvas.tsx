@@ -184,8 +184,8 @@ export default function CharacterCanvas({ className = "", onStateChange }: Chara
 
       isNearCenterRef.current = isCenter;
 
-      // Shortest-path angular lerp with factor ~0.20 for responsive, silky-smooth head turning
-      currentAngleRef.current = lerpAngle(currentAngleRef.current, targetAngle, 0.20);
+      // Shortest-path angular lerp with factor ~0.16 for silky-smooth organic neck rotation
+      currentAngleRef.current = lerpAngle(currentAngleRef.current, targetAngle, 0.16);
 
       // Select frame
       let imgToDraw: HTMLImageElement | null = null;
