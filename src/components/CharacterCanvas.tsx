@@ -244,7 +244,7 @@ export default function CharacterCanvas({ className = "", onStateChange }: Chara
           ref={canvasRef}
           width={1280}
           height={720}
-          className="h-full w-full object-contain object-bottom select-none pointer-events-none block md:h-[85vh] md:max-h-[820px] md:w-auto md:aspect-[16/9]"
+          className="h-full w-auto max-w-none aspect-[16/9] object-contain object-bottom select-none pointer-events-none block md:h-[85vh] md:max-h-[820px] md:w-auto md:aspect-[16/9]"
           style={{
             backgroundColor: "transparent",
           }}

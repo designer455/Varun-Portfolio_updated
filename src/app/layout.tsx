@@ -18,7 +18,7 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Varun Chauhan | Senior Graphic & Web Designer Portfolio",
+  title: "Varun Chauhan | Graphics & Web Designer",
   description: "Explore the portfolio of Varun Chauhan, Senior Graphic & Web Designer. Turning complex brand concepts into stunning website interfaces, print media, and social creatives.",
   metadataBase: new URL("https://varunchauhan.design"),
 };
