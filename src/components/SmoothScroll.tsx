@@ -38,10 +38,13 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     }
     rafId = requestAnimationFrame(raf);
 
+    (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
+
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
       lenisRef.current = null;
+      delete (window as unknown as { __lenis?: Lenis }).__lenis;
     };
   }, []);
 

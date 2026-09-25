@@ -226,27 +226,27 @@ export default function WhatsAppWidget() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-sans">
-      {/* Floating Toggle Button (Displays large mascot without circle when closed) */}
+    <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 font-sans pointer-events-auto">
+      {/* Floating Toggle Button (Sleek compact companion capsule) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`transition-all duration-300 hover:scale-115 active:scale-90 group relative z-50 cursor-pointer flex items-center justify-center ${
+        className={`transition-all duration-300 hover:scale-105 active:scale-95 group relative z-50 cursor-pointer flex items-center justify-center rounded-full border border-white/15 bg-[#0C111D]/90 backdrop-blur-xl shadow-2xl ${
           isOpen
-            ? "w-14 h-14 rounded-full bg-zinc-950 border border-zinc-850 shadow-xl text-white"
-            : "w-24 h-24 bg-transparent"
+            ? "w-12 h-12 text-white hover:border-[#CCFF00] hover:text-[#CCFF00]"
+            : "w-12 h-12 sm:w-14 sm:h-14 p-2.5 hover:border-[#CCFF00]/60 hover:shadow-[0_0_20px_rgba(204,255,0,0.2)]"
         }`}
         aria-label="Open Chatbot"
       >
         {isOpen ? (
-          <X size={24} className="transition-transform duration-300 rotate-90" />
+          <X size={20} className="transition-transform duration-300 rotate-90" />
         ) : (
-          <div className="relative w-24 h-24 drop-shadow-2xl">
-            <span className="absolute inset-2 rounded-full bg-emerald-400/20 animate-ping pointer-events-none" />
+          <div className="relative w-full h-full">
+            <span className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-[#CCFF00] border-2 border-[#030712] animate-pulse" />
             <Image
               src="/assets/4015765_195.svg"
               alt="Assistant Bot Trigger"
               fill
-              className="object-contain animate-bounce"
+              className="object-contain"
               priority
             />
           </div>
