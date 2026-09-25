@@ -132,11 +132,11 @@ export default function Contact() {
               </div>
               <h2 className="text-4xl md:text-5xl font-black font-display tracking-tight text-zinc-900 uppercase mb-6">
                 HAVE A PROJECT? <br />
-                LET'S TALK
+                LET&apos;S TALK
               </h2>
               <div className="w-12 h-1 bg-[#15803d] mb-8" />
               <p className="text-zinc-600 leading-relaxed mb-8 max-w-sm text-sm">
-                Have an idea, publication, or product launch? Let's cooperate to construct something unforgettable.
+                Have an idea, publication, or product launch? Let&apos;s cooperate to construct something unforgettable.
               </p>
             </div>
 

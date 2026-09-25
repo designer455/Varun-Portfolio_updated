@@ -31,8 +31,6 @@ export default function Portfolio() {
 
   // Filter and Interleave projects
   const filteredProjects = useMemo(() => {
-    setVisibleCount(6); // Reset pagination on category change
-    
     if (selectedCategory === "All") {
       // Group projects by category
       const grouped = CATEGORIES.reduce((acc, cat) => {
@@ -119,7 +117,10 @@ export default function Portfolio() {
           {CATEGORIES.map((category) => (
             <button
               key={category}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => {
+                setSelectedCategory(category);
+                setVisibleCount(6);
+              }}
               className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                 selectedCategory === category
                   ? "bg-[#15803d] text-white border-[#15803d]"
@@ -238,7 +239,7 @@ export default function Portfolio() {
               disabled
               className="px-8 py-3.5 rounded-full border border-zinc-200 text-zinc-400 bg-zinc-100 font-bold uppercase tracking-wider cursor-not-allowed"
             >
-              That's all my projects
+              That&apos;s all my projects
             </button>
           )}
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, FormEvent } from "react";
-import { MessageSquare, X, Send, ArrowRight, MessageCircle } from "lucide-react";
+import { X, Send, MessageCircle } from "lucide-react";
 import Image from "next/image";
 
 interface ChatMessage {
@@ -12,26 +12,21 @@ interface ChatMessage {
 }
 
 export default function WhatsAppWidget() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [customInput, setCustomInput] = useState("");
-  const [showOptions, setShowOptions] = useState(true);
-  const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
   const whatsappNumber = "918700236209";
   const welcomeMessage = "Hi there! 👋 I am Varun's virtual assistant. Ask me anything about his skills, services, project links, notice period, or experience!";
 
-  useEffect(() => {
-    const time = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-    setMessages([
-      {
-        sender: "bot",
-        text: welcomeMessage,
-        timestamp: time,
-      },
-    ]);
-  }, []);
+  const [isOpen, setIsOpen] = useState(false);
+  const [showOptions] = useState(true);
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      sender: "bot",
+      text: welcomeMessage,
+      timestamp: "Just now",
+    },
+  ]);
+  const [customInput, setCustomInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -274,7 +269,7 @@ export default function WhatsAppWidget() {
             </div>
             <div>
               <h4 className="text-xs font-bold tracking-wide uppercase text-white">
-                Varun's Assistant
+                Varun&apos;s Assistant
               </h4>
               <p className="text-[9px] text-emerald-300 font-medium flex items-center gap-1.5 mt-0.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />

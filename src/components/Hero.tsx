@@ -1,112 +1,131 @@
 "use client";
 
-import React, { useState } from "react";
-import { ArrowUpRight, Eye, Compass } from "lucide-react";
+import React from "react";
+import { ArrowUpRight, ArrowDown } from "lucide-react";
 import CharacterCanvas from "./CharacterCanvas";
+import MagneticButton from "./MagneticButton";
 
 export default function Hero() {
-  const [trackerState, setTrackerState] = useState<{
-    isCenter: boolean;
-    angleDeg: number;
-    direction: string;
-  }>({
-    isCenter: true,
-    angleDeg: 0,
-    direction: "CENTER",
-  });
-
   return (
     <section
       id="home"
-      className="relative w-full h-[100dvh] min-h-[100dvh] md:h-screen md:min-h-0 overflow-hidden select-none bg-black flex flex-col justify-between md:block"
+      className="relative w-full h-[100dvh] min-h-[100dvh] md:h-screen md:min-h-0 overflow-hidden select-none bg-[#030712] flex flex-col justify-between md:block"
+      aria-label="Introduction & Interactive Hero"
     >
       {/* 
-        CRITICAL CONSTRAINT 1: Motionless Canvas
-        On mobile: Sits cleanly in lower half below text (no overlap)
-        On desktop: Full-screen background layout (unchanged)
-        NO CSS 3D transforms (no perspective, rotateX, rotateY).
+        Layer 3: Ambient Studio Glow
       */}
-      <div className="relative flex-1 w-full min-h-0 flex items-end justify-center pointer-events-none order-2 md:order-none md:absolute md:inset-0 md:w-full md:h-full">
-        <CharacterCanvas onStateChange={setTrackerState} />
-      </div>
-
-      {/* Subtle Studio Ambient Gradient */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.06)_0%,transparent_60%)] pointer-events-none" />
+      <div className="absolute inset-0 ambient-glow-hero pointer-events-none z-0" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#ccff00]/[0.025] rounded-full blur-3xl pointer-events-none z-0" />
 
       {/* 
-        Hero Typography & Interactive Controls:
-        Mobile (< md): Top under header (pt-22 px-6), text then character below
-        Desktop (md+): Absolute bottom-left overlay (unchanged)
+        Layer 5: 360° Interactive Character Canvas
+        Desktop: Bottom-anchored centered background character with dynamic eye/head tracking
+        Mobile: Cleanly positioned in lower half with zero text overlap
       */}
-      <div className="relative z-20 flex flex-col items-start px-6 pt-22 sm:pt-26 sm:px-12 md:pt-0 md:px-0 md:absolute md:bottom-12 md:left-16 order-1 md:order-none pointer-events-auto shrink-0">
-        {/* "Hi, I'm" in clean, spaced modern sans-serif */}
-        <span className="text-xs sm:text-sm font-sans tracking-[0.35em] uppercase text-white/80 font-medium mb-1 drop-shadow-sm">
-          Hi, I'm
-        </span>
+      <div className="relative flex-1 w-full min-h-0 flex items-end justify-center pointer-events-none order-2 md:order-none md:absolute md:inset-0 md:w-full md:h-full z-10">
+        <CharacterCanvas />
+      </div>
 
-        {/* Name in large, elegant cursive script (Dancing Script) */}
-        <h1
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-cursive text-white leading-[1.05] mb-2 sm:mb-3 md:mb-4 select-none"
-          style={{
-            textShadow: "0 8px 24px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.35)",
-          }}
-        >
+      {/* 
+        Layer 6 & 7: Hero Typography, Positioning & Metadata
+        Mobile: Positioned at top below navigation pill
+        Desktop: Positioned at bottom-left with massive editorial presence
+      */}
+      <div className="relative z-20 flex flex-col items-start px-6 pt-20 sm:pt-24 sm:px-10 md:pt-0 md:px-0 md:absolute md:bottom-14 md:left-14 lg:left-18 order-1 md:order-none pointer-events-auto shrink-0 max-w-2xl">
+        
+        {/* Status Chip / Capability Pill */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 backdrop-blur-md mb-3.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#ccff00] animate-pulse" />
+          <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-white/80 font-medium">
+            AI-POWERED CREATIVE TECHNOLOGIST
+          </span>
+        </div>
+
+        {/* Primary Name Headline */}
+        <h1 className="text-display-xl font-display text-white uppercase tracking-tight leading-[0.95] mb-2 drop-shadow-md">
           Varun Chauhan
         </h1>
 
-        {/* Compact bio about Varun Chauhan */}
-        <p className="max-w-[320px] sm:max-w-[360px] text-xs sm:text-sm text-white/90 leading-relaxed font-sans mb-4 sm:mb-5 md:mb-6 font-normal drop-shadow-sm">
-          I am Varun Chauhan, a Senior Graphic &amp; Web Designer. I turn complex brand concepts into stunning website interfaces, print media, and social creatives.
+        {/* Core Positioning Subheading */}
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap mb-3 text-sm sm:text-base md:text-lg font-mono font-bold tracking-wider uppercase text-[#ccff00]">
+          <span>AI</span>
+          <span className="text-white/30">×</span>
+          <span>DESIGN</span>
+          <span className="text-white/30">×</span>
+          <span>DEVELOPMENT</span>
+        </div>
+
+        {/* Concise Supporting Description */}
+        <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-sans max-w-md mb-6 font-normal">
+          Crafting high-impact digital products, brand identities, and autonomous creative workflows with modern code and generative AI.
         </p>
 
-        {/* Two stylish white pill buttons: Resume and Let's Talk */}
+        {/* Layer 8: Primary & Secondary CTAs with Magnetic Physics */}
         <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
-          {/* Resume: Solid White Pill with Arrow Icon */}
-          <a
-            href="/CV-Varun_Chauhan.pdf"
-            download
-            className="group inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 rounded-full bg-white text-black font-semibold text-xs sm:text-sm tracking-wider uppercase hover:bg-white/90 hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_8px_25px_rgba(0,0,0,0.25)] cursor-pointer"
+          {/* Primary CTA: Explore Work */}
+          <MagneticButton
+            asAnchor
+            href="#portfolio"
+            data-cursor="explore"
+            strength={16}
+            className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 rounded-full bg-[#ccff00] text-black font-mono font-bold text-xs sm:text-sm tracking-wider uppercase hover:bg-[#d8ff33] active:scale-95 transition-all shadow-[0_0_24px_rgba(204,255,0,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
-            <span>Resume</span>
+            <span>EXPLORE WORK</span>
             <ArrowUpRight
               size={15}
               className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             />
-          </a>
+          </MagneticButton>
 
-          {/* Let's Talk: Frosted Glass / White Border Pill */}
-          <a
+          {/* Secondary CTA: Let's Connect */}
+          <MagneticButton
+            asAnchor
             href="#contact"
-            className="group inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 rounded-full bg-white/10 backdrop-blur-[20px] border border-white/40 text-white font-semibold text-xs sm:text-sm tracking-wider uppercase hover:bg-white hover:text-black hover:border-white active:scale-95 transition-all duration-300 shadow-[0_8px_25px_rgba(0,0,0,0.15)] cursor-pointer"
-            style={{
-              backdropFilter: "blur(20px)",
-              WebkitBackdropFilter: "blur(20px)",
-            }}
+            data-cursor="link"
+            strength={12}
+            className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 rounded-full bg-white/[0.06] backdrop-blur-md border border-white/20 text-white font-mono font-semibold text-xs sm:text-sm tracking-wider uppercase hover:bg-white hover:text-black hover:border-white active:scale-95 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ccff00]"
           >
-            <span>Let's Talk</span>
-          </a>
+            <span>LET&apos;S CONNECT</span>
+            <ArrowUpRight
+              size={15}
+              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 opacity-60 group-hover:opacity-100"
+            />
+          </MagneticButton>
         </div>
       </div>
 
-      {/* Subtle Live Tracking Telemetry HUD */}
-      <div className="absolute bottom-4 right-4 sm:bottom-8 sm:right-12 z-20 flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/15 text-white/80 text-[10px] sm:text-[11px] font-mono tracking-wider shadow-lg">
-        {trackerState.isCenter ? (
-          <>
-            <Eye size={12} className="text-[#ccff00] animate-pulse" />
-            <span className="text-[#ccff00] font-semibold">EYE CONTACT</span>
-          </>
-        ) : (
-          <>
-            <Compass size={12} className="text-white/70" />
-            <span>
-              {trackerState.direction} ({trackerState.angleDeg}°)
-            </span>
-          </>
-        )}
+      {/* 
+        Honest Descriptive Pillar HUD:
+        CREATIVE · INTELLIGENCE · ENGINEERING
+        Desktop only, bottom right
+      */}
+      <aside
+        className="hidden md:flex absolute bottom-14 right-14 z-20 items-center gap-3 px-4 py-2 rounded-full bg-[#0c111d]/70 backdrop-blur-md border border-white/10 text-white/70 text-[11px] font-mono tracking-widest uppercase shadow-lg pointer-events-auto"
+        aria-label="Capabilities Overview"
+      >
+        <span className="flex items-center gap-1.5 text-white/90 font-medium">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#ccff00]" />
+          CREATIVE
+        </span>
+        <span className="text-white/25">·</span>
+        <span className="text-white/90 font-medium">INTELLIGENCE</span>
+        <span className="text-white/25">·</span>
+        <span className="text-white/90 font-medium">ENGINEERING</span>
+      </aside>
+
+      {/* 
+        Layer 9: Minimal Scroll Indicator (Bottom Center)
+      */}
+      <div className="hidden lg:flex absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-1.5 text-white/40 pointer-events-none">
+        <span className="text-[9px] font-mono tracking-[0.25em] uppercase font-medium">
+          SCROLL TO EXPLORE
+        </span>
+        <ArrowDown size={12} className="animate-bounce text-[#ccff00]/60" />
       </div>
 
-      {/* Bottom Fade Gradient into dark theme sections (#030712) */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-28 bg-gradient-to-b from-transparent via-[#030712]/60 to-[#030712] pointer-events-none z-10" />
+      {/* Bottom Fade Gradient into dark theme sections */}
+      <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-28 bg-gradient-to-b from-transparent via-[#030712]/70 to-[#030712] pointer-events-none z-10" />
     </section>
   );
 }

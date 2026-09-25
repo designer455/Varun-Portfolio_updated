@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Award, ExternalLink, Globe, X } from "lucide-react";
+import { ExternalLink, X } from "lucide-react";
 
 export default function Credentials() {
   const [activePdf, setActivePdf] = useState<string | null>(null);

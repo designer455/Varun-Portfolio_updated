@@ -8,10 +8,11 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import CustomCursor from "@/components/CustomCursor";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export default function Home() {
   return (
-    <>
+    <SmoothScroll>
       <CustomCursor />
       <Navbar />
       <main className="flex-1">
@@ -24,6 +25,6 @@ export default function Home() {
       </main>
       <Footer />
       <WhatsAppWidget />
-    </>
+    </SmoothScroll>
   );
 }

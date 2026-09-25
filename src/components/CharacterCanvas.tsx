@@ -113,26 +113,25 @@ export default function CharacterCanvas({ className = "", onStateChange }: Chara
       mousePosRef.current = { x: e.clientX, y: e.clientY };
     };
 
-    const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        hasInteractedRef.current = true;
-        mousePosRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-      }
-    };
-
     const handleMouseLeave = () => {
       // When cursor leaves viewport, smoothly reset to center direct eye contact
       mousePosRef.current = null;
     };
 
+    // Only attach continuous pointermove on fine-pointer devices (desktop)
+    const isTouch = window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768;
+    if (isTouch) {
+      // Mobile holds confident center eye contact without battery drain
+      hasInteractedRef.current = false;
+      return () => clearTimeout(timer);
+    }
+
     window.addEventListener("pointermove", handlePointerMove, { passive: true, capture: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: true, capture: true });
     window.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       clearTimeout(timer);
       window.removeEventListener("pointermove", handlePointerMove, { capture: true });
-      window.removeEventListener("touchmove", handleTouchMove, { capture: true });
       window.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
@@ -212,7 +211,7 @@ export default function CharacterCanvas({ className = "", onStateChange }: Chara
         ctx.drawImage(imgToDraw, 0, 0, 1280, 720);
       }
 
-      if (onStateChange && (isCenter !== lastIsCenter || Math.abs(angleDeg - lastAngleDeg) >= 2)) {
+      if (onStateChange && (isCenter !== lastIsCenter || dirName !== lastDirection || Math.abs(angleDeg - lastAngleDeg) >= 2)) {
         lastIsCenter = isCenter;
         lastAngleDeg = angleDeg;
         lastDirection = dirName;

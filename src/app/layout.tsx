@@ -18,8 +18,8 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Varun Chauhan | Graphics & Web Designer",
-  description: "Explore the portfolio of Varun Chauhan, Senior Graphic & Web Designer. Turning complex brand concepts into stunning website interfaces, print media, and social creatives.",
+  title: "Varun Chauhan | AI × Design × Development | Creative Technologist",
+  description: "Varun Chauhan — AI-Powered Creative Technologist blending high-impact visual design, full-stack web engineering, and autonomous AI/MCP workflows.",
   metadataBase: new URL("https://varunchauhan.design"),
 };
 
@@ -33,7 +33,8 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${outfit.variable} ${dancingScript.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full bg-background text-foreground flex flex-col">
+      <body className="min-h-full bg-background text-foreground flex flex-col relative selection:bg-[#ccff00] selection:text-[#030712]">
+        <div className="cinematic-noise-overlay" aria-hidden="true" />
         {children}
       </body>
     </html>
