@@ -9,7 +9,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { label: "WORK", href: "#portfolio", id: "portfolio" },
+    { label: "WORK", href: "#work", id: "work" },
     { label: "ABOUT", href: "#about", id: "about" },
     { label: "SERVICES", href: "#services", id: "services" },
     { label: "CREDENTIALS", href: "#credentials", id: "credentials" },
@@ -21,7 +21,7 @@ export default function Navbar() {
       setIsScrolled(window.scrollY > 40);
 
       const scrollPos = window.scrollY + 250;
-      const sections = ["home", "portfolio", "about", "services", "credentials", "contact"];
+      const sections = ["home", "work", "about", "services", "credentials", "contact"];
       for (const s of sections) {
         const el = document.getElementById(s);
         if (el) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight, Terminal, Code2, Network, Bot, Sparkles } from "lucide-react";
-import MagneticButton from "../MagneticButton";
+import MagneticButton from "./MagneticButton";
 
 interface AILabTeaserProps {
   onEnterLab?: () => void;

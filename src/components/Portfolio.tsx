@@ -7,8 +7,8 @@ import { projectsData, Project } from "@/data/projects";
 import pdfCoversManifest from "@/data/pdfCoversManifest.json";
 
 // Components
-import CategoryStory from "./CategoryStory";
 import MagneticButton from "./MagneticButton";
+import AILabTeaser from "./AILabTeaser";
 
 // Lightbox
 import Lightbox from "yet-another-react-lightbox";
@@ -91,7 +91,7 @@ export default function Portfolio() {
     const activeFilterObj = VAULT_FILTERS.find((f) => f.id === selectedFilter);
 
     if (selectedFilter === "ALL" || !activeFilterObj?.category) {
-      // Balanced interleaving across all 5 categories for a rich showcase
+      // Balanced interleaving across all 5 disciplines for a rich showcase
       const grouped = VAULT_FILTERS.reduce((acc, f) => {
         if (f.id === "ALL" || !f.category) return acc;
         acc[f.id] = projectsData.filter((p) => p.category === f.category);
@@ -157,39 +157,6 @@ export default function Portfolio() {
     }
   }, [getProjectArtwork, handleOpenLightbox]);
 
-  // Callback for CategoryStory component
-  const handleOpenProjectFromStory = useCallback((project: Project) => {
-    if (project.pdf && project.pdf.endsWith(".pdf")) {
-      setActivePdf(project.pdf);
-    } else if (project.image) {
-      handleOpenLightbox(project.image);
-    }
-  }, [handleOpenLightbox]);
-
-  const handleExploreVault = (slug: string) => {
-    const mapping: Record<string, VaultFilterId> = {
-      web: "WEB",
-      branding: "BRANDING",
-      social: "SOCIAL",
-      editorial: "EDITORIAL",
-      email: "EMAIL",
-      ailab: "ALL",
-    };
-
-    if (mapping[slug]) {
-      setSelectedFilter(mapping[slug]);
-      setVisibleCount(12);
-    }
-    const vaultEl = document.getElementById("vault");
-    if (vaultEl) {
-      if (typeof window !== "undefined" && (window as unknown as { __lenis?: { scrollTo: (target: HTMLElement, opts: { offset: number }) => void } }).__lenis) {
-        (window as unknown as { __lenis: { scrollTo: (target: HTMLElement, opts: { offset: number }) => void } }).__lenis.scrollTo(vaultEl, { offset: -60 });
-      } else {
-        vaultEl.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
-
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 12);
   };
@@ -200,18 +167,17 @@ export default function Portfolio() {
     <div className="bg-[#030712] text-white relative">
       
       {/* ========================================================
-          1. PINNED / SCROLL-DRIVEN CATEGORY STORY STAGE
+          1. PRIMARY WORK VAULT (ALL 114 VERIFIED WORKS)
+          Direct landing anchor for #work, #portfolio, #vault
       ======================================================== */}
-      <CategoryStory
-        onSelectProject={handleOpenProjectFromStory}
-        onOpenPdf={(pdf) => setActivePdf(pdf)}
-        onExploreVault={handleExploreVault}
-      />
+      <section
+        id="work"
+        className="py-24 sm:py-32 border-t border-white/10 bg-[#070D18] scroll-mt-20 relative overflow-hidden"
+      >
+        {/* Alias anchor targets for backward compatibility */}
+        <div id="portfolio" className="absolute -top-20 pointer-events-none" />
+        <div id="vault" className="absolute -top-20 pointer-events-none" />
 
-      {/* ========================================================
-          2. COMPREHENSIVE WORK VAULT (ALL 114 VERIFIED WORKS)
-      ======================================================== */}
-      <section id="vault" className="py-24 sm:py-32 border-t border-white/10 bg-[#070D18] scroll-mt-24 relative overflow-hidden">
         {/* Subtle Ambient Background Light */}
         <div className="absolute top-1/4 -left-40 w-96 h-96 rounded-full bg-[#15803D]/10 blur-[130px] pointer-events-none" />
         <div className="absolute bottom-1/4 -right-40 w-96 h-96 rounded-full bg-[#CCFF00]/5 blur-[130px] pointer-events-none" />
@@ -227,9 +193,9 @@ export default function Portfolio() {
                   COMPREHENSIVE WORK VAULT
                 </span>
               </div>
-              <h3 className="text-3xl sm:text-5xl font-black font-display tracking-tight text-white uppercase">
+              <h2 className="text-3xl sm:text-5xl font-black font-display tracking-tight text-white uppercase">
                 ALL 114 VERIFIED WORKS
-              </h3>
+              </h2>
               <p className="mt-2 text-sm text-zinc-400 max-w-xl">
                 Explore the complete production catalog spanning web interfaces, commercial email campaigns, editorial magazine publications, branding, and social assets.
               </p>
@@ -417,6 +383,33 @@ export default function Portfolio() {
             )}
           </div>
 
+        </div>
+      </section>
+
+      {/* ========================================================
+          2. AI LAB GATEWAY & ARCHITECTURE SECTION
+      ======================================================== */}
+      <section
+        id="ailab"
+        className="py-20 sm:py-28 border-t border-white/10 bg-[#030712] relative overflow-hidden"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="h-2 w-2 rounded-full bg-[#15803D]" />
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#CCFF00]">
+                RESEARCH & AUTONOMOUS CODE
+              </span>
+            </div>
+            <h3 className="text-2xl sm:text-4xl font-black font-display tracking-tight text-white uppercase">
+              AI LAB & MCP SYSTEMS
+            </h3>
+            <p className="mt-1 text-sm text-zinc-400 max-w-xl">
+              Exploring agentic intelligence, custom Model Context Protocol servers, and generative AI production pipelines.
+            </p>
+          </div>
+
+          <AILabTeaser />
         </div>
       </section>
 

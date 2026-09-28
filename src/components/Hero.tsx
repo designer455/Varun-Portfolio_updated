@@ -66,7 +66,7 @@ export default function Hero() {
           {/* Primary CTA: Explore Work */}
           <MagneticButton
             asAnchor
-            href="#portfolio"
+            href="#work"
             data-cursor="explore"
             strength={16}
             className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 rounded-full bg-[#ccff00] text-black font-mono font-bold text-xs sm:text-sm tracking-wider uppercase hover:bg-[#d8ff33] active:scale-95 transition-all shadow-[0_0_24px_rgba(204,255,0,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
