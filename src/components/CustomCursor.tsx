@@ -75,17 +75,23 @@ export default function CustomCursor() {
         switch (type) {
           case "view":
             scale = 1.9;
-            textContent = "VIEW →";
+            textContent = "VIEW";
+            isPill = true;
+            break;
+          case "read":
+            scale = 1.9;
+            textContent = "READ";
+            isPill = true;
+            break;
+          case "open":
+          case "project":
+            scale = 1.8;
+            textContent = "OPEN ↗";
             isPill = true;
             break;
           case "explore":
             scale = 1.9;
             textContent = "EXPLORE";
-            isPill = true;
-            break;
-          case "project":
-            scale = 1.8;
-            textContent = "OPEN ↗";
             isPill = true;
             break;
           case "link":

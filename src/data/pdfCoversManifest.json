@@ -1,0 +1,512 @@
+{
+  "emailer-5": {
+    "projectId": "emailer-5",
+    "title": "Emailer 5",
+    "pdfPath": "/assets/portfolio/Emailer 5.pdf",
+    "coverPath": "/assets/portfolio/covers/emailer-5.webp",
+    "sizeBytes": 40532,
+    "sizeFormatted": "39.6 KB",
+    "width": 1000,
+    "height": 1294
+  },
+  "emailer-8": {
+    "projectId": "emailer-8",
+    "title": "Emailer 8",
+    "pdfPath": "/assets/portfolio/Emailer 8.pdf",
+    "coverPath": "/assets/portfolio/covers/emailer-8.webp",
+    "sizeBytes": 108918,
+    "sizeFormatted": "106.4 KB",
+    "width": 1000,
+    "height": 1500
+  },
+  "magazine-ad1": {
+    "projectId": "magazine-ad1",
+    "title": "Magazine Ad1",
+    "pdfPath": "/assets/portfolio/Magazine ad1.pdf",
+    "coverPath": "/assets/portfolio/covers/magazine-ad1.webp",
+    "sizeBytes": 123792,
+    "sizeFormatted": "120.9 KB",
+    "width": 1000,
+    "height": 1451
+  },
+  "magazine-ad-2": {
+    "projectId": "magazine-ad-2",
+    "title": "Magazine Ad 2",
+    "pdfPath": "/assets/portfolio/Magazine ad 2.pdf",
+    "coverPath": "/assets/portfolio/covers/magazine-ad-2.webp",
+    "sizeBytes": 55068,
+    "sizeFormatted": "53.8 KB",
+    "width": 1000,
+    "height": 1317
+  },
+  "magazine-ad-3": {
+    "projectId": "magazine-ad-3",
+    "title": "Magazine Ad 3",
+    "pdfPath": "/assets/portfolio/Magazine ad 3.pdf",
+    "coverPath": "/assets/portfolio/covers/magazine-ad-3.webp",
+    "sizeBytes": 125952,
+    "sizeFormatted": "123.0 KB",
+    "width": 1000,
+    "height": 1325
+  },
+  "magazine-ad-4": {
+    "projectId": "magazine-ad-4",
+    "title": "Magazine Ad 4",
+    "pdfPath": "/assets/portfolio/Magazine ad 4.pdf",
+    "coverPath": "/assets/portfolio/covers/magazine-ad-4.webp",
+    "sizeBytes": 132376,
+    "sizeFormatted": "129.3 KB",
+    "width": 1000,
+    "height": 1390
+  },
+  "magazine-ad-6": {
+    "projectId": "magazine-ad-6",
+    "title": "Magazine Ad 6",
+    "pdfPath": "/assets/portfolio/Magazine ad 6.pdf",
+    "coverPath": "/assets/portfolio/covers/magazine-ad-6.webp",
+    "sizeBytes": 53356,
+    "sizeFormatted": "52.1 KB",
+    "width": 1000,
+    "height": 1253
+  },
+  "magazine-ad-7": {
+    "projectId": "magazine-ad-7",
+    "title": "Magazine Ad 7",
+    "pdfPath": "/assets/portfolio/Magazine ad 7.pdf",
+    "coverPath": "/assets/portfolio/covers/magazine-ad-7.webp",
+    "sizeBytes": 101084,
+    "sizeFormatted": "98.7 KB",
+    "width": 1000,
+    "height": 1294
+  },
+  "magazine-ad-8": {
+    "projectId": "magazine-ad-8",
+    "title": "Magazine Ad 8",
+    "pdfPath": "/assets/portfolio/Magazine ad 8.pdf",
+    "coverPath": "/assets/portfolio/covers/magazine-ad-8.webp",
+    "sizeBytes": 80502,
+    "sizeFormatted": "78.6 KB",
+    "width": 1000,
+    "height": 1386
+  },
+  "magazine-ad-9": {
+    "projectId": "magazine-ad-9",
+    "title": "Magazine Ad 9",
+    "pdfPath": "/assets/portfolio/Magazine ad 9.pdf",
+    "coverPath": "/assets/portfolio/covers/magazine-ad-9.webp",
+    "sizeBytes": 85250,
+    "sizeFormatted": "83.3 KB",
+    "width": 1000,
+    "height": 1272
+  },
+  "magazine-ad-10": {
+    "projectId": "magazine-ad-10",
+    "title": "Magazine Ad 10",
+    "pdfPath": "/assets/portfolio/Magazine ad 10.pdf",
+    "coverPath": "/assets/portfolio/covers/magazine-ad-10.webp",
+    "sizeBytes": 131420,
+    "sizeFormatted": "128.3 KB",
+    "width": 1000,
+    "height": 1452
+  },
+  "magazine-ad-11": {
+    "projectId": "magazine-ad-11",
+    "title": "Magazine Ad 11",
+    "pdfPath": "/assets/portfolio/Magazine ad 11.pdf",
+    "coverPath": "/assets/portfolio/covers/magazine-ad-11.webp",
+    "sizeBytes": 120976,
+    "sizeFormatted": "118.1 KB",
+    "width": 1000,
+    "height": 1412
+  },
+  "magazine-ad-12": {
+    "projectId": "magazine-ad-12",
+    "title": "Magazine Ad 12",
+    "pdfPath": "/assets/portfolio/Magazine ad 12.pdf",
+    "coverPath": "/assets/portfolio/covers/magazine-ad-12.webp",
+    "sizeBytes": 208342,
+    "sizeFormatted": "203.5 KB",
+    "width": 1000,
+    "height": 1382
+  },
+  "printing": {
+    "projectId": "printing",
+    "title": "Printing",
+    "pdfPath": "/assets/portfolio/Printing.pdf",
+    "coverPath": "/assets/portfolio/covers/printing.webp",
+    "sizeBytes": 78970,
+    "sizeFormatted": "77.1 KB",
+    "width": 1000,
+    "height": 738
+  },
+  "printing-2": {
+    "projectId": "printing-2",
+    "title": "Printing 2",
+    "pdfPath": "/assets/portfolio/Printing 2.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-2.webp",
+    "sizeBytes": 77728,
+    "sizeFormatted": "75.9 KB",
+    "width": 1000,
+    "height": 719
+  },
+  "printing-3": {
+    "projectId": "printing-3",
+    "title": "Printing 3",
+    "pdfPath": "/assets/portfolio/Printing 3.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-3.webp",
+    "sizeBytes": 74438,
+    "sizeFormatted": "72.7 KB",
+    "width": 1000,
+    "height": 1412
+  },
+  "printing-4": {
+    "projectId": "printing-4",
+    "title": "Printing 4",
+    "pdfPath": "/assets/portfolio/Printing 4.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-4.webp",
+    "sizeBytes": 21704,
+    "sizeFormatted": "21.2 KB",
+    "width": 1000,
+    "height": 666
+  },
+  "printing-5": {
+    "projectId": "printing-5",
+    "title": "Printing 5",
+    "pdfPath": "/assets/portfolio/Printing 5.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-5.webp",
+    "sizeBytes": 81604,
+    "sizeFormatted": "79.7 KB",
+    "width": 1000,
+    "height": 1412
+  },
+  "printing-6": {
+    "projectId": "printing-6",
+    "title": "Printing 6",
+    "pdfPath": "/assets/portfolio/Printing 6.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-6.webp",
+    "sizeBytes": 71666,
+    "sizeFormatted": "70.0 KB",
+    "width": 1000,
+    "height": 1412
+  },
+  "printing-7": {
+    "projectId": "printing-7",
+    "title": "Printing 7",
+    "pdfPath": "/assets/portfolio/Printing 7.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-7.webp",
+    "sizeBytes": 84316,
+    "sizeFormatted": "82.3 KB",
+    "width": 1000,
+    "height": 1412
+  },
+  "printing-8": {
+    "projectId": "printing-8",
+    "title": "Printing 8",
+    "pdfPath": "/assets/portfolio/Printing 8.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-8.webp",
+    "sizeBytes": 110702,
+    "sizeFormatted": "108.1 KB",
+    "width": 1000,
+    "height": 1411
+  },
+  "printing-10": {
+    "projectId": "printing-10",
+    "title": "Printing 10",
+    "pdfPath": "/assets/portfolio/Printing 10.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-10.webp",
+    "sizeBytes": 68046,
+    "sizeFormatted": "66.5 KB",
+    "width": 1000,
+    "height": 1412
+  },
+  "printing-12": {
+    "projectId": "printing-12",
+    "title": "Printing 12",
+    "pdfPath": "/assets/portfolio/Printing 12.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-12.webp",
+    "sizeBytes": 99964,
+    "sizeFormatted": "97.6 KB",
+    "width": 1000,
+    "height": 1411
+  },
+  "printing-13": {
+    "projectId": "printing-13",
+    "title": "Printing 13",
+    "pdfPath": "/assets/portfolio/Printing 13.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-13.webp",
+    "sizeBytes": 88862,
+    "sizeFormatted": "86.8 KB",
+    "width": 1000,
+    "height": 1412
+  },
+  "printing-14": {
+    "projectId": "printing-14",
+    "title": "Printing 14",
+    "pdfPath": "/assets/portfolio/Printing 14.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-14.webp",
+    "sizeBytes": 71310,
+    "sizeFormatted": "69.6 KB",
+    "width": 1000,
+    "height": 555
+  },
+  "printing-15": {
+    "projectId": "printing-15",
+    "title": "Printing 15",
+    "pdfPath": "/assets/portfolio/Printing 15.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-15.webp",
+    "sizeBytes": 9514,
+    "sizeFormatted": "9.3 KB",
+    "width": 1000,
+    "height": 1336
+  },
+  "printing-16": {
+    "projectId": "printing-16",
+    "title": "Printing 16",
+    "pdfPath": "/assets/portfolio/Printing 16.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-16.webp",
+    "sizeBytes": 76970,
+    "sizeFormatted": "75.2 KB",
+    "width": 1000,
+    "height": 1412
+  },
+  "printing-17": {
+    "projectId": "printing-17",
+    "title": "Printing 17",
+    "pdfPath": "/assets/portfolio/Printing 17.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-17.webp",
+    "sizeBytes": 38338,
+    "sizeFormatted": "37.4 KB",
+    "width": 1000,
+    "height": 1500
+  },
+  "printing-18": {
+    "projectId": "printing-18",
+    "title": "Printing 18",
+    "pdfPath": "/assets/portfolio/Printing 18.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-18.webp",
+    "sizeBytes": 92490,
+    "sizeFormatted": "90.3 KB",
+    "width": 1000,
+    "height": 1412
+  },
+  "printing-19": {
+    "projectId": "printing-19",
+    "title": "Printing 19",
+    "pdfPath": "/assets/portfolio/Printing 19.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-19.webp",
+    "sizeBytes": 95634,
+    "sizeFormatted": "93.4 KB",
+    "width": 1000,
+    "height": 1250
+  },
+  "printing-23": {
+    "projectId": "printing-23",
+    "title": "Printing 23",
+    "pdfPath": "/assets/portfolio/Printing 23.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-23.webp",
+    "sizeBytes": 85136,
+    "sizeFormatted": "83.1 KB",
+    "width": 1000,
+    "height": 782
+  },
+  "printing-24": {
+    "projectId": "printing-24",
+    "title": "Printing 24",
+    "pdfPath": "/assets/portfolio/Printing 24.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-24.webp",
+    "sizeBytes": 77638,
+    "sizeFormatted": "75.8 KB",
+    "width": 1000,
+    "height": 1412
+  },
+  "printing-26": {
+    "projectId": "printing-26",
+    "title": "Printing 26",
+    "pdfPath": "/assets/portfolio/Printing 26.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-26.webp",
+    "sizeBytes": 27798,
+    "sizeFormatted": "27.1 KB",
+    "width": 1000,
+    "height": 725
+  },
+  "printing-27": {
+    "projectId": "printing-27",
+    "title": "Printing 27",
+    "pdfPath": "/assets/portfolio/Printing 27.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-27.webp",
+    "sizeBytes": 465016,
+    "sizeFormatted": "454.1 KB",
+    "width": 1000,
+    "height": 1454
+  },
+  "printing-28": {
+    "projectId": "printing-28",
+    "title": "Printing 28",
+    "pdfPath": "/assets/portfolio/Printing 28.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-28.webp",
+    "sizeBytes": 145488,
+    "sizeFormatted": "142.1 KB",
+    "width": 1000,
+    "height": 706
+  },
+  "printing-30": {
+    "projectId": "printing-30",
+    "title": "Printing 30",
+    "pdfPath": "/assets/portfolio/Printing 30.pdf",
+    "coverPath": "/assets/portfolio/covers/printing-30.webp",
+    "sizeBytes": 97320,
+    "sizeFormatted": "95.0 KB",
+    "width": 1000,
+    "height": 1430
+  },
+  "social-post1": {
+    "projectId": "social-post1",
+    "title": "Social Post1",
+    "pdfPath": "/assets/portfolio/Social post1.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post1.webp",
+    "sizeBytes": 90788,
+    "sizeFormatted": "88.7 KB",
+    "width": 1000,
+    "height": 1000
+  },
+  "social-post-4": {
+    "projectId": "social-post-4",
+    "title": "Social Post 4",
+    "pdfPath": "/assets/portfolio/social post 4.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-4.webp",
+    "sizeBytes": 146430,
+    "sizeFormatted": "143.0 KB",
+    "width": 1000,
+    "height": 1249
+  },
+  "social-post-6": {
+    "projectId": "social-post-6",
+    "title": "Social Post 6",
+    "pdfPath": "/assets/portfolio/social post 6.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-6.webp",
+    "sizeBytes": 47786,
+    "sizeFormatted": "46.7 KB",
+    "width": 1000,
+    "height": 1249
+  },
+  "social-post-17": {
+    "projectId": "social-post-17",
+    "title": "Social Post 17",
+    "pdfPath": "/assets/portfolio/social post 17.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-17.webp",
+    "sizeBytes": 101154,
+    "sizeFormatted": "98.8 KB",
+    "width": 1000,
+    "height": 1000
+  },
+  "social-post-22": {
+    "projectId": "social-post-22",
+    "title": "Social Post 22",
+    "pdfPath": "/assets/portfolio/social post 22.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-22.webp",
+    "sizeBytes": 91420,
+    "sizeFormatted": "89.3 KB",
+    "width": 1000,
+    "height": 1250
+  },
+  "social-post-28": {
+    "projectId": "social-post-28",
+    "title": "Social Post 28",
+    "pdfPath": "/assets/portfolio/social post 28.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-28.webp",
+    "sizeBytes": 65054,
+    "sizeFormatted": "63.5 KB",
+    "width": 1000,
+    "height": 1249
+  },
+  "social-post-37": {
+    "projectId": "social-post-37",
+    "title": "Social Post 37",
+    "pdfPath": "/assets/portfolio/social post 37.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-37.webp",
+    "sizeBytes": 43966,
+    "sizeFormatted": "42.9 KB",
+    "width": 1000,
+    "height": 1000
+  },
+  "social-post-39": {
+    "projectId": "social-post-39",
+    "title": "Social Post 39",
+    "pdfPath": "/assets/portfolio/social post 39.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-39.webp",
+    "sizeBytes": 52382,
+    "sizeFormatted": "51.2 KB",
+    "width": 1000,
+    "height": 1000
+  },
+  "social-post-40": {
+    "projectId": "social-post-40",
+    "title": "Social Post 40",
+    "pdfPath": "/assets/portfolio/social post 40.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-40.webp",
+    "sizeBytes": 112082,
+    "sizeFormatted": "109.5 KB",
+    "width": 1000,
+    "height": 1249
+  },
+  "social-post-41": {
+    "projectId": "social-post-41",
+    "title": "Social Post 41",
+    "pdfPath": "/assets/portfolio/social post 41.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-41.webp",
+    "sizeBytes": 42504,
+    "sizeFormatted": "41.5 KB",
+    "width": 1000,
+    "height": 1000
+  },
+  "social-post-43": {
+    "projectId": "social-post-43",
+    "title": "Social Post 43",
+    "pdfPath": "/assets/portfolio/social post 43.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-43.webp",
+    "sizeBytes": 37440,
+    "sizeFormatted": "36.6 KB",
+    "width": 1000,
+    "height": 1000
+  },
+  "social-post-46": {
+    "projectId": "social-post-46",
+    "title": "Social Post 46",
+    "pdfPath": "/assets/portfolio/social post 46.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-46.webp",
+    "sizeBytes": 35004,
+    "sizeFormatted": "34.2 KB",
+    "width": 1000,
+    "height": 1000
+  },
+  "social-post-48": {
+    "projectId": "social-post-48",
+    "title": "Social Post 48",
+    "pdfPath": "/assets/portfolio/Social post 48.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-48.webp",
+    "sizeBytes": 88344,
+    "sizeFormatted": "86.3 KB",
+    "width": 1000,
+    "height": 1000
+  },
+  "social-post-54": {
+    "projectId": "social-post-54",
+    "title": "Social Post 54",
+    "pdfPath": "/assets/portfolio/social post 54.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-54.webp",
+    "sizeBytes": 65468,
+    "sizeFormatted": "63.9 KB",
+    "width": 1000,
+    "height": 1000
+  },
+  "social-post-61": {
+    "projectId": "social-post-61",
+    "title": "Social Post 61",
+    "pdfPath": "/assets/portfolio/social post 61.pdf",
+    "coverPath": "/assets/portfolio/covers/social-post-61.webp",
+    "sizeBytes": 126160,
+    "sizeFormatted": "123.2 KB",
+    "width": 1000,
+    "height": 1249
+  }
+}

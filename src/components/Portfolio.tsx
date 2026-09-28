@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { FileText, Eye, ArrowUpRight, Layers, X, ChevronDown } from "lucide-react";
 import { projectsData, Project } from "@/data/projects";
+import pdfCoversManifest from "@/data/pdfCoversManifest.json";
 
 // Components
 import CategoryStory from "./CategoryStory";
@@ -14,20 +15,20 @@ import Lightbox from "yet-another-react-lightbox";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/styles.css";
 
-const VAULT_CATEGORIES = [
-  "All",
-  "Website & Landing Pages",
-  "Email Campaigns",
-  "Magazine Advertisements",
-  "Print Media & Branding",
-  "Social Media Creatives",
+const VAULT_FILTERS = [
+  { id: "ALL", label: "ALL", category: null },
+  { id: "WEB", label: "WEB", category: "Website & Landing Pages" },
+  { id: "BRANDING", label: "BRANDING", category: "Print Media & Branding" },
+  { id: "SOCIAL", label: "SOCIAL", category: "Social Media Creatives" },
+  { id: "EDITORIAL", label: "EDITORIAL", category: "Magazine Advertisements" },
+  { id: "EMAIL", label: "EMAIL", category: "Email Campaigns" },
 ] as const;
 
-type VaultCategoryType = typeof VAULT_CATEGORIES[number];
+type VaultFilterId = typeof VAULT_FILTERS[number]["id"];
 
 export default function Portfolio() {
-  const [selectedCategory, setSelectedCategory] = useState<VaultCategoryType>("All");
-  const [visibleCount, setVisibleCount] = useState<number>(9);
+  const [selectedFilter, setSelectedFilter] = useState<VaultFilterId>("ALL");
+  const [visibleCount, setVisibleCount] = useState<number>(12);
   
   // Lightbox State
   const [isOpen, setIsOpen] = useState(false);
@@ -36,19 +37,64 @@ export default function Portfolio() {
   // In-app PDF Viewer Modal
   const [activePdf, setActivePdf] = useState<string | null>(null);
 
-  // Construct flat list of all slides with valid images
-  const allImageSlides = useMemo(() => {
-    return projectsData
-      .filter((p) => Boolean(p.image))
-      .map((p) => ({ src: p.image, title: p.title }));
+  // Escape key handler and focus management for PDF modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && activePdf) {
+        setActivePdf(null);
+      }
+    };
+    if (activePdf) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [activePdf]);
+
+  // Compute real dynamic counts from verified project data
+  const filterCounts = useMemo(() => {
+    const counts: Record<VaultFilterId, number> = {
+      ALL: projectsData.length,
+      WEB: 0,
+      BRANDING: 0,
+      SOCIAL: 0,
+      EDITORIAL: 0,
+      EMAIL: 0,
+    };
+    projectsData.forEach((p) => {
+      if (p.category === "Website & Landing Pages") counts.WEB++;
+      else if (p.category === "Print Media & Branding") counts.BRANDING++;
+      else if (p.category === "Social Media Creatives") counts.SOCIAL++;
+      else if (p.category === "Magazine Advertisements") counts.EDITORIAL++;
+      else if (p.category === "Email Campaigns") counts.EMAIL++;
+    });
+    return counts;
+  }, []);
+
+  // Helper to resolve artwork (real project image OR generated WebP first-page PDF cover)
+  const getProjectArtwork = useCallback((project: Project): string => {
+    if (project.image && project.image.trim() !== "") {
+      return project.image;
+    }
+    const manifestEntry = (pdfCoversManifest as Record<string, { coverPath: string }>)[project.id];
+    if (manifestEntry?.coverPath) {
+      return manifestEntry.coverPath;
+    }
+    return "";
   }, []);
 
   // Filter and Interleave projects for the Vault
   const filteredProjects = useMemo(() => {
-    if (selectedCategory === "All") {
-      const grouped = VAULT_CATEGORIES.reduce((acc, cat) => {
-        if (cat === "All") return acc;
-        acc[cat] = projectsData.filter((p) => p.category === cat);
+    const activeFilterObj = VAULT_FILTERS.find((f) => f.id === selectedFilter);
+
+    if (selectedFilter === "ALL" || !activeFilterObj?.category) {
+      // Balanced interleaving across all 5 categories for a rich showcase
+      const grouped = VAULT_FILTERS.reduce((acc, f) => {
+        if (f.id === "ALL" || !f.category) return acc;
+        acc[f.id] = projectsData.filter((p) => p.category === f.category);
         return acc;
       }, {} as Record<string, Project[]>);
 
@@ -58,9 +104,9 @@ export default function Portfolio() {
 
       while (hasMoreItems) {
         hasMoreItems = false;
-        for (const cat of VAULT_CATEGORIES) {
-          if (cat === "All") continue;
-          const list = grouped[cat];
+        for (const f of VAULT_FILTERS) {
+          if (f.id === "ALL" || !f.category) continue;
+          const list = grouped[f.id];
           if (list && index < list.length) {
             interleaved.push(list[index]);
             hasMoreItems = true;
@@ -72,46 +118,80 @@ export default function Portfolio() {
       return interleaved;
     }
     
-    return projectsData.filter((project) => project.category === selectedCategory);
-  }, [selectedCategory]);
+    return projectsData.filter((project) => project.category === activeFilterObj.category);
+  }, [selectedFilter]);
 
   const visibleProjects = useMemo(() => {
     return filteredProjects.slice(0, visibleCount);
   }, [filteredProjects, visibleCount]);
 
-  const handleOpenProject = useCallback((project: Project) => {
-    if (project.image) {
-      const slideIdx = allImageSlides.findIndex((s) => s.src === project.image);
-      if (slideIdx !== -1) {
-        setPhotoIndex(slideIdx);
-        setIsOpen(true);
+  // Construct flat list of all slides for Lightbox with valid image covers
+  const allImageSlides = useMemo(() => {
+    return filteredProjects.reduce<{ src: string; title: string; description: string }[]>((acc, p) => {
+      const art = getProjectArtwork(p);
+      if (art) {
+        acc.push({ src: art, title: p.title, description: p.category });
       }
-    } else if (project.pdf) {
-      setActivePdf(project.pdf);
+      return acc;
+    }, []);
+  }, [filteredProjects, getProjectArtwork]);
+
+  const handleOpenLightbox = useCallback((artworkSrc: string) => {
+    const idx = allImageSlides.findIndex((s) => s.src === artworkSrc);
+    if (idx !== -1) {
+      setPhotoIndex(idx);
+    } else {
+      setPhotoIndex(0);
     }
+    setIsOpen(true);
   }, [allImageSlides]);
 
+  const handleCardClick = useCallback((project: Project) => {
+    if (project.pdf && project.pdf.endsWith(".pdf")) {
+      setActivePdf(project.pdf);
+    } else {
+      const art = getProjectArtwork(project);
+      if (art) {
+        handleOpenLightbox(art);
+      }
+    }
+  }, [getProjectArtwork, handleOpenLightbox]);
+
+  // Callback for CategoryStory component
+  const handleOpenProjectFromStory = useCallback((project: Project) => {
+    if (project.pdf && project.pdf.endsWith(".pdf")) {
+      setActivePdf(project.pdf);
+    } else if (project.image) {
+      handleOpenLightbox(project.image);
+    }
+  }, [handleOpenLightbox]);
+
   const handleExploreVault = (slug: string) => {
-    const mapping: Record<string, VaultCategoryType> = {
-      web: "Website & Landing Pages",
-      branding: "Print Media & Branding",
-      social: "Social Media Creatives",
-      editorial: "Magazine Advertisements",
-      email: "Email Campaigns",
+    const mapping: Record<string, VaultFilterId> = {
+      web: "WEB",
+      branding: "BRANDING",
+      social: "SOCIAL",
+      editorial: "EDITORIAL",
+      email: "EMAIL",
+      ailab: "ALL",
     };
 
     if (mapping[slug]) {
-      setSelectedCategory(mapping[slug]);
-      setVisibleCount(9);
+      setSelectedFilter(mapping[slug]);
+      setVisibleCount(12);
     }
     const vaultEl = document.getElementById("vault");
     if (vaultEl) {
-      vaultEl.scrollIntoView({ behavior: "smooth" });
+      if (typeof window !== "undefined" && (window as unknown as { __lenis?: { scrollTo: (target: HTMLElement, opts: { offset: number }) => void } }).__lenis) {
+        (window as unknown as { __lenis: { scrollTo: (target: HTMLElement, opts: { offset: number }) => void } }).__lenis.scrollTo(vaultEl, { offset: -60 });
+      } else {
+        vaultEl.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
   const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 9);
+    setVisibleCount((prev) => prev + 12);
   };
 
   const hasMore = visibleCount < filteredProjects.length;
@@ -123,7 +203,7 @@ export default function Portfolio() {
           1. PINNED / SCROLL-DRIVEN CATEGORY STORY STAGE
       ======================================================== */}
       <CategoryStory
-        onSelectProject={handleOpenProject}
+        onSelectProject={handleOpenProjectFromStory}
         onOpenPdf={(pdf) => setActivePdf(pdf)}
         onExploreVault={handleExploreVault}
       />
@@ -155,127 +235,169 @@ export default function Portfolio() {
               </p>
             </div>
 
-            <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 border border-white/10 bg-white/5 rounded-full px-4 py-2">
+            <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 border border-white/10 bg-white/5 rounded-full px-4 py-2 self-start md:self-auto">
               <Layers className="h-3.5 w-3.5 text-[#15803D]" />
               <span>SHOWING {visibleProjects.length} OF {filteredProjects.length}</span>
             </div>
           </div>
 
-          {/* Category Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-2 mb-12">
-            {VAULT_CATEGORIES.map((category) => {
-              const isSelected = selectedCategory === category;
+          {/* Category Filter Tabs (Scrollable on mobile, flex-wrap on desktop) */}
+          <div
+            role="tablist"
+            aria-label="Filter Projects by Category"
+            className="flex items-center gap-2 mb-12 overflow-x-auto pb-3 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {VAULT_FILTERS.map((filter) => {
+              const isSelected = selectedFilter === filter.id;
+              const count = filterCounts[filter.id] ?? 0;
+
               return (
                 <button
-                  key={category}
+                  key={filter.id}
+                  role="tab"
+                  aria-selected={isSelected}
+                  aria-controls="vault-grid"
                   onClick={() => {
-                    setSelectedCategory(category);
-                    setVisibleCount(9);
+                    setSelectedFilter(filter.id);
+                    setVisibleCount(12);
                   }}
-                  className={`rounded-full px-4 py-2 text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+                  className={`shrink-0 flex items-center gap-2 rounded-full px-4 sm:px-5 py-2.5 text-xs font-mono tracking-wider uppercase transition-all duration-300 cursor-pointer min-h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CCFF00] ${
                     isSelected
-                      ? "bg-[#CCFF00] text-[#030712] shadow-[0_0_20px_rgba(204,255,0,0.25)] font-black"
+                      ? "bg-[#CCFF00] text-[#030712] font-black shadow-[0_0_20px_rgba(204,255,0,0.3)]"
                       : "bg-[#0C111D] border border-white/10 text-zinc-400 hover:text-white hover:border-white/30"
                   }`}
                 >
-                  {category}
+                  <span>{filter.label}</span>
+                  <span
+                    className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${
+                      isSelected
+                        ? "bg-[#030712] text-[#CCFF00]"
+                        : "bg-white/10 text-zinc-400"
+                    }`}
+                  >
+                    {count}
+                  </span>
                 </button>
               );
             })}
           </div>
 
           {/* 3-Column Responsive Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {visibleProjects.map((project) => (
-              <div
-                key={project.id}
-                role="button"
-                tabIndex={0}
-                onClick={() => handleOpenProject(project)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    handleOpenProject(project);
-                  }
-                }}
-                data-cursor="open"
-                className="group relative flex flex-col rounded-2xl overflow-hidden bg-[#0C111D] border border-white/10 hover:border-[#CCFF00]/40 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.6)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
-              >
-                {/* Media Container */}
-                <div className="relative w-full aspect-[4/3] bg-[#030712] overflow-hidden flex items-center justify-center border-b border-white/5">
-                  {project.image ? (
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      loading="lazy"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
-                  ) : (
-                    /* PDF Fallback */
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#0C111D] via-[#070D18] to-[#030712] flex flex-col items-center justify-center p-6 text-center">
-                      <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#CCFF00] mb-3 group-hover:scale-110 group-hover:border-[#CCFF00]/40 transition-all duration-300">
-                        <FileText size={26} />
+          <div
+            id="vault-grid"
+            role="region"
+            aria-label="Projects Catalog Grid"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {visibleProjects.map((project) => {
+              const artwork = getProjectArtwork(project);
+              const isPdf = Boolean(project.pdf && project.pdf.endsWith(".pdf"));
+
+              return (
+                <div
+                  key={project.id}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={isPdf ? `Read publication: ${project.title}` : `View project: ${project.title}`}
+                  onClick={() => handleCardClick(project)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      handleCardClick(project);
+                    }
+                  }}
+                  data-cursor={isPdf ? "read" : "view"}
+                  className="group relative flex flex-col rounded-2xl overflow-hidden bg-[#0C111D] border border-white/10 hover:border-[#CCFF00]/40 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.6)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CCFF00] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070D18]"
+                >
+                  {/* Media Container */}
+                  <div className="relative w-full aspect-[4/3] bg-[#030712] overflow-hidden flex items-center justify-center border-b border-white/5">
+                    {artwork ? (
+                      <Image
+                        src={artwork}
+                        alt={project.title}
+                        fill
+                        loading="lazy"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-[#0C111D] flex items-center justify-center text-zinc-500 font-mono text-xs">
+                        NO PREVIEW AVAILABLE
                       </div>
-                      <span className="text-[10px] uppercase font-mono tracking-widest text-[#CCFF00] mb-1">
+                    )}
+
+                    {/* Format Badge (Top Left) */}
+                    <div className="absolute top-3 left-3 z-10">
+                      {isPdf ? (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#030712]/80 backdrop-blur-md border border-[#CCFF00]/40 text-[#CCFF00] text-[10px] font-mono font-bold tracking-wider uppercase shadow-md">
+                          <FileText className="w-3 h-3 text-[#CCFF00]" />
+                          PDF PUBLICATION
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#030712]/75 backdrop-blur-md border border-white/15 text-zinc-300 text-[10px] font-mono tracking-wider uppercase shadow-md">
+                          VISUAL ARTWORK
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Desktop Hover Overlay (Action Reveal) */}
+                    <div className="absolute inset-0 bg-[#030712]/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden sm:flex flex-col items-center justify-center p-6 z-20">
+                      <span className="text-[10px] text-[#CCFF00] font-mono tracking-widest uppercase mb-2">
                         {project.category}
                       </span>
-                      <span className="text-xs font-semibold text-zinc-300 uppercase max-w-[200px] truncate">
-                        PDF Publication
+                      <h4 className="text-lg font-bold font-display uppercase tracking-wide text-white text-center mb-6 max-w-[260px] line-clamp-2">
+                        {project.title}
+                      </h4>
+
+                      <div className="flex items-center gap-2.5" onClick={(e) => e.stopPropagation()}>
+                        {isPdf && (
+                          <button
+                            type="button"
+                            data-cursor="open"
+                            onClick={() => setActivePdf(project.pdf!)}
+                            className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#CCFF00] text-[#030712] font-black text-xs font-mono uppercase tracking-wider hover:bg-white transition-all shadow-[0_0_15px_rgba(204,255,0,0.3)] cursor-pointer"
+                            aria-label={`Read full PDF for ${project.title}`}
+                          >
+                            <FileText size={13} />
+                            <span>READ PDF</span>
+                          </button>
+                        )}
+
+                        {artwork && (
+                          <button
+                            type="button"
+                            data-cursor="open"
+                            onClick={() => handleOpenLightbox(artwork)}
+                            className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-white font-mono text-xs uppercase tracking-wider hover:bg-white/15 hover:border-white transition-colors cursor-pointer"
+                            aria-label={`Inspect artwork for ${project.title}`}
+                          >
+                            <Eye size={13} />
+                            <span>INSPECT</span>
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card Bottom Meta (Always legible on mobile and desktop) */}
+                  <div className="p-4 flex items-center justify-between gap-3 bg-[#0C111D]">
+                    <div className="min-w-0 flex-1">
+                      <span className="text-[10px] font-mono tracking-wider uppercase text-[#CCFF00]/80 block truncate">
+                        {project.category}
                       </span>
+                      <h5 className="text-sm font-bold text-white tracking-tight truncate mt-0.5">
+                        {project.title}
+                      </h5>
                     </div>
-                  )}
 
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-[#030712]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6 z-10">
-                    <span className="text-[10px] text-[#CCFF00] font-mono tracking-widest uppercase mb-2">
-                      {project.category}
-                    </span>
-                    <h4 className="text-lg font-bold font-display uppercase tracking-wide text-white text-center mb-6 max-w-[260px]">
-                      {project.title}
-                    </h4>
-
-                    <div className="flex gap-3" onClick={(e) => e.stopPropagation()}>
-                      {project.pdf && (
-                        <button
-                          onClick={() => setActivePdf(project.pdf!)}
-                          className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#CCFF00] text-[#030712] font-black text-xs font-mono uppercase tracking-wider hover:bg-white transition-colors cursor-pointer"
-                        >
-                          <FileText size={13} />
-                          <span>READ PDF</span>
-                        </button>
-                      )}
-
-                      {project.image && (
-                        <button
-                          onClick={() => handleOpenProject(project)}
-                          className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/20 text-white font-mono text-xs uppercase tracking-wider hover:bg-white/10 hover:border-white transition-colors cursor-pointer"
-                        >
-                          <Eye size={13} />
-                          <span>INSPECT</span>
-                        </button>
-                      )}
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 text-zinc-400 group-hover:border-[#CCFF00] group-hover:text-[#CCFF00] group-hover:bg-[#CCFF00]/10 transition-colors">
+                      {isPdf ? <FileText className="h-3.5 w-3.5" /> : <ArrowUpRight className="h-3.5 w-3.5" />}
                     </div>
                   </div>
                 </div>
-
-                {/* Card Bottom Meta */}
-                <div className="p-4 flex items-center justify-between">
-                  <div>
-                    <span className="text-[10px] font-mono tracking-wider uppercase text-zinc-500">
-                      {project.category}
-                    </span>
-                    <h5 className="text-sm font-bold text-white tracking-tight truncate max-w-[220px]">
-                      {project.title}
-                    </h5>
-                  </div>
-
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full border border-white/10 text-zinc-400 group-hover:border-[#CCFF00] group-hover:text-[#CCFF00] transition-colors">
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Load More Pagination */}
@@ -316,6 +438,7 @@ export default function Portfolio() {
         <div
           role="dialog"
           aria-modal="true"
+          aria-label="PDF Document Viewer"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-md"
         >
           <div className="relative w-full max-w-5xl h-[88vh] bg-[#0C111D] rounded-2xl border border-white/20 shadow-2xl overflow-hidden flex flex-col animate-fade-in">
@@ -336,6 +459,7 @@ export default function Portfolio() {
                   href={activePdf}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-cursor="open"
                   className="flex items-center gap-1 rounded-md border border-white/15 px-3 py-1 text-xs font-mono text-zinc-300 hover:text-white hover:border-white transition-colors"
                 >
                   <span>Open in Tab</span>
