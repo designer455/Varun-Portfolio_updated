@@ -27,13 +27,13 @@ export default function AILab() {
         <div className="max-w-3xl mb-16 sm:mb-20">
           <div className="flex items-center gap-2 mb-3">
             <span className="h-2 w-2 rounded-full bg-[#15803D]" />
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#CCFF00]">
-              TOOLKIT & SYSTEMS
+            <span className="text-xs font-mono font-bold tracking-widest text-[#CCFF00]">
+              Toolkit &amp; systems
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-semibold font-display tracking-tight text-white uppercase leading-none">
-            AI LAB
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-semibold font-display tracking-tight text-white leading-none">
+            AI Lab
           </h2>
           <p className="text-base sm:text-lg font-display font-medium text-zinc-300 mt-3 tracking-wide">
             A curated showcase of artificial intelligence, MCP systems, creative suites, and modern web technologies.
@@ -49,12 +49,12 @@ export default function AILab() {
         <div className="mb-24 sm:mb-28">
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-[11px] font-mono text-[#CCFF00] uppercase font-bold tracking-wider">
-                01 // REASONING & RUNTIMES
+              <span className="text-[11px] font-mono text-[#CCFF00] font-bold tracking-wider">
+                01 // Reasoning &amp; runtimes
               </span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-semibold font-display text-white uppercase tracking-tight">
-              AI TOOLS
+            <h3 className="text-2xl sm:text-3xl font-semibold font-display text-white tracking-tight">
+              AI tools
             </h3>
             <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-xl">
               Frontier reasoning models and autonomous coding environments powering daily development workflows.
@@ -88,7 +88,7 @@ export default function AILab() {
                 </div>
 
                 <div className="mt-5 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <span className="text-zinc-400 uppercase tracking-wider">ACTIVE STACK</span>
+                  <span className="text-zinc-400 tracking-wider">Active stack</span>
                   <span className="text-[#CCFF00] opacity-80 group-hover:opacity-100 transition-opacity">●</span>
                 </div>
               </div>
@@ -102,12 +102,12 @@ export default function AILab() {
         <div className="mb-24 sm:mb-28">
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-[11px] font-mono text-[#CCFF00] uppercase font-bold tracking-wider">
-                02 // AGENTIC INFRASTRUCTURE
+              <span className="text-[11px] font-mono text-[#CCFF00] font-bold tracking-wider">
+                02 // Agentic infrastructure
               </span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-semibold font-display text-white uppercase tracking-tight">
-              MCP SYSTEMS
+            <h3 className="text-2xl sm:text-3xl font-semibold font-display text-white tracking-tight">
+              MCP systems
             </h3>
             <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-xl">
               Custom Model Context Protocol systems I build and deploy to connect language models with production data sources.
@@ -157,8 +157,8 @@ export default function AILab() {
 
                   {/* Verified Capabilities */}
                   <div className="mb-6">
-                    <span className="text-[11px] font-mono uppercase font-bold text-zinc-400 tracking-wider block mb-3">
-                      VERIFIED CAPABILITIES
+                    <span className="text-[11px] font-mono font-bold text-zinc-400 tracking-wider block mb-3">
+                      Verified capabilities
                     </span>
                     <ul className="space-y-2">
                       {mcp.capabilities.map((cap, i) => (
@@ -172,8 +172,8 @@ export default function AILab() {
 
                   {/* Setup Flow (4 Steps) */}
                   <div className="mb-8 pt-5 border-t border-white/10">
-                    <span className="text-[11px] font-mono uppercase font-bold text-zinc-400 tracking-wider block mb-3">
-                      CONNECTION STEPS
+                    <span className="text-[11px] font-mono font-bold text-zinc-400 tracking-wider block mb-3">
+                      Connection steps
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {mcp.setupSteps.map((stepItem) => (
@@ -229,12 +229,12 @@ export default function AILab() {
         <div className="mb-24 sm:mb-28">
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-[11px] font-mono text-[#CCFF00] uppercase font-bold tracking-wider">
-                03 // VISUAL DIRECTION
+              <span className="text-[11px] font-mono text-[#CCFF00] font-bold tracking-wider">
+                03 // Visual direction
               </span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-semibold font-display text-white uppercase tracking-tight">
-              CREATIVE TOOLS
+            <h3 className="text-2xl sm:text-3xl font-semibold font-display text-white tracking-tight">
+              Creative tools
             </h3>
             <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-xl">
               The tools behind the visual work, brand systems, and editorial publication design.
@@ -267,8 +267,8 @@ export default function AILab() {
                 </div>
 
                 <div className="mt-5 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <span className="text-zinc-400 uppercase tracking-wider">CREATIVE</span>
-                  <span className="text-zinc-400 group-hover:text-white transition-colors">4+ YEARS</span>
+                  <span className="text-zinc-400 tracking-wider">Creative</span>
+                  <span className="text-zinc-400 group-hover:text-white transition-colors">4+ years</span>
                 </div>
               </div>
             ))}
@@ -281,12 +281,12 @@ export default function AILab() {
         <div className="mb-20 sm:mb-24">
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-[11px] font-mono text-[#CCFF00] uppercase font-bold tracking-wider">
-                04 // DIGITAL ENGINEERING
+              <span className="text-[11px] font-mono text-[#CCFF00] font-bold tracking-wider">
+                04 // Digital engineering
               </span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-semibold font-display text-white uppercase tracking-tight">
-              WEB & DEVELOPMENT
+            <h3 className="text-2xl sm:text-3xl font-semibold font-display text-white tracking-tight">
+              Web &amp; development
             </h3>
             <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-xl">
               Technologies I use to build scalable web applications, dynamic CMS solutions, and commercial storefronts.
@@ -319,8 +319,8 @@ export default function AILab() {
                 </div>
 
                 <div className="mt-5 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <span className="text-zinc-400 uppercase tracking-wider">ENGINEERING</span>
-                  <span className="text-[#15803D] font-bold">READY</span>
+                  <span className="text-zinc-400 tracking-wider">Engineering</span>
+                  <span className="text-[#15803D] font-bold">Ready</span>
                 </div>
               </div>
             ))}
@@ -333,26 +333,26 @@ export default function AILab() {
         <div className="mb-20 sm:mb-24">
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-[11px] font-mono text-[#CCFF00] uppercase font-bold tracking-wider">
-                05 // DEPLOYMENT & INFRASTRUCTURE
+              <span className="text-[11px] font-mono text-[#CCFF00] font-bold tracking-wider">
+                05 // Deployment &amp; infrastructure
               </span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-semibold font-display text-white uppercase tracking-tight">
-              DEPLOYMENT & INFRASTRUCTURE
+            <h3 className="text-2xl sm:text-3xl font-semibold font-display text-white tracking-tight">
+              Deployment &amp; infrastructure
             </h3>
             <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-xl">
               Platforms and workflows I use to take web applications from local development to scalable production.
             </p>
 
             <div className="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/5 text-[10px] font-mono text-zinc-400 mt-4">
-              <span className="text-zinc-500 uppercase tracking-wider">WORKFLOW:</span>
-              <span className="text-zinc-300">Design &amp; Code</span>
+              <span className="text-zinc-500 tracking-wider">Workflow:</span>
+              <span className="text-zinc-300">Design &amp; code</span>
               <span className="text-zinc-600">→</span>
               <span className="text-zinc-200 font-medium">GitHub</span>
               <span className="text-zinc-600">→</span>
               <span className="text-zinc-200 font-medium">Vercel / Hostinger</span>
               <span className="text-zinc-600">→</span>
-              <span className="text-[#CCFF00] font-medium">Live Production</span>
+              <span className="text-[#CCFF00] font-medium">Live production</span>
             </div>
           </div>
 
@@ -382,8 +382,8 @@ export default function AILab() {
                 </div>
 
                 <div className="mt-5 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-400">
-                  <span className="text-zinc-400 uppercase tracking-wider">PRODUCTION</span>
-                  <span className="text-[#CCFF00] opacity-80 group-hover:opacity-100 transition-opacity">● LIVE</span>
+                  <span className="text-zinc-400 tracking-wider">Production</span>
+                  <span className="text-[#CCFF00] opacity-80 group-hover:opacity-100 transition-opacity">● Live</span>
                 </div>
               </div>
             ))}
@@ -395,10 +395,10 @@ export default function AILab() {
         ======================================================== */}
         <div className="p-8 sm:p-12 rounded-3xl bg-[#0C111D] border border-white/10 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-2xl">
           <div className="max-w-xl">
-            <span className="text-xs font-mono text-[#CCFF00] uppercase font-bold tracking-widest block mb-2">
-              BUILD WITH ME
+            <span className="text-xs font-mono text-[#CCFF00] font-bold tracking-widest block mb-2">
+              Build with me
             </span>
-            <h3 className="text-2xl sm:text-3xl font-display font-semibold text-white uppercase tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-display font-semibold text-white tracking-tight">
               Ready to create something intelligent and visually distinctive?
             </h3>
             <p className="text-sm text-zinc-400 font-sans mt-2 leading-relaxed">
@@ -411,9 +411,9 @@ export default function AILab() {
               <a
                 href="#contact"
                 data-cursor="explore"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#CCFF00] hover:bg-[#b8e600] text-black font-display font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-[0_0_20px_rgba(204,255,0,0.25)] hover:shadow-[0_0_30px_rgba(204,255,0,0.4)] cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#CCFF00] hover:bg-[#b8e600] text-black font-display font-bold text-xs tracking-wider transition-all duration-200 shadow-[0_0_20px_rgba(204,255,0,0.25)] hover:shadow-[0_0_30px_rgba(204,255,0,0.4)] cursor-pointer"
               >
-                <span>GET IN TOUCH →</span>
+                <span>Get in touch →</span>
               </a>
             </MagneticButton>
           </div>

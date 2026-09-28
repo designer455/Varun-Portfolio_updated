@@ -133,7 +133,7 @@ async function runQA() {
   await evaluate(`
     (() => {
       const el = document.querySelector("#ailab");
-      const h3 = Array.from(el.querySelectorAll("h3")).find(h => h.textContent.includes("AI TOOLS"));
+      const h3 = Array.from(el.querySelectorAll("h3")).find(h => h.textContent.toLowerCase().includes("ai tools"));
       if (h3) h3.scrollIntoView({ behavior: "instant", block: "start" });
     })()
   `);
@@ -166,7 +166,7 @@ async function runQA() {
   await evaluate(`
     (() => {
       const el = document.querySelector("#ailab");
-      const h3 = Array.from(el.querySelectorAll("h3")).find(h => h.textContent.includes("CREATIVE TOOLS"));
+      const h3 = Array.from(el.querySelectorAll("h3")).find(h => h.textContent.toLowerCase().includes("creative tools"));
       if (h3) h3.scrollIntoView({ behavior: "instant", block: "start" });
     })()
   `);
@@ -177,7 +177,7 @@ async function runQA() {
   await evaluate(`
     (() => {
       const el = document.querySelector("#ailab");
-      const h3 = Array.from(el.querySelectorAll("h3")).find(h => h.textContent.includes("WEB & DEVELOPMENT"));
+      const h3 = Array.from(el.querySelectorAll("h3")).find(h => h.textContent.toLowerCase().includes("web & development"));
       if (h3) h3.scrollIntoView({ behavior: "instant", block: "start" });
     })()
   `);
@@ -188,7 +188,7 @@ async function runQA() {
   await evaluate(`
     (() => {
       const el = document.querySelector("#ailab");
-      const h3 = Array.from(el.querySelectorAll("h3")).find(h => h.textContent.includes("DEPLOYMENT & INFRASTRUCTURE"));
+      const h3 = Array.from(el.querySelectorAll("h3")).find(h => h.textContent.toLowerCase().includes("deployment & infrastructure"));
       if (h3) h3.scrollIntoView({ behavior: "instant", block: "start" });
     })()
   `);
@@ -219,7 +219,7 @@ async function runQA() {
   await evaluate(`
     (() => {
       const el = document.querySelector("#ailab");
-      const h3 = Array.from(el.querySelectorAll("h3")).find(h => h.textContent.includes("MCP SYSTEMS"));
+      const h3 = Array.from(el.querySelectorAll("h3")).find(h => h.textContent.toLowerCase().includes("mcp systems"));
       if (h3) h3.scrollIntoView({ behavior: "instant", block: "start" });
     })()
   `);
