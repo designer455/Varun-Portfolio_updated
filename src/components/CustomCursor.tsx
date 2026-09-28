@@ -78,6 +78,11 @@ export default function CustomCursor() {
             textContent = "VIEW";
             isPill = true;
             break;
+          case "inspect":
+            scale = 1.9;
+            textContent = "INSPECT";
+            isPill = true;
+            break;
           case "read":
             scale = 1.9;
             textContent = "READ";

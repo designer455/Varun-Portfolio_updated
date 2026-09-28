@@ -10,12 +10,14 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import JarvisAssistant from "@/components/JarvisAssistant";
 import CustomCursor from "@/components/CustomCursor";
+import AmbientBackground from "@/components/AmbientBackground";
 import SmoothScroll from "@/components/SmoothScroll";
 
 export default function Home() {
   return (
     <SmoothScroll>
       <CustomCursor />
+      <AmbientBackground />
       <Navbar />
       <main className="flex-1">
         <Hero />
