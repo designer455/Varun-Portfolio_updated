@@ -199,11 +199,26 @@ async function runQA() {
   await scrollIntoView("#about");
   await captureScreenshot("experience_ambient_background.png");
 
-  // 12. Credentials with ambient background
+  // 12. Services with ambient background
+  await scrollIntoView("#services");
+  await captureScreenshot("services_ambient_background.png");
+
+  // 13. Credentials with ambient background
   await scrollIntoView("#credentials");
   await captureScreenshot("credentials_ambient_background.png");
 
-  // 13. Contact with ambient background
+  // 14. Websites worked on
+  await evaluate(`
+    (() => {
+      const el = document.querySelector("#credentials");
+      const h2 = Array.from(el.querySelectorAll("h2")).find(h => h.textContent.toLowerCase().includes("websites worked on"));
+      if (h2) h2.scrollIntoView({ behavior: "instant", block: "start" });
+    })()
+  `);
+  await new Promise((r) => setTimeout(r, 400));
+  await captureScreenshot("websites_worked_on_ambient_background.png");
+
+  // 15. Contact with ambient background
   await scrollIntoView("#contact");
   await captureScreenshot("contact_ambient_background.png");
 
