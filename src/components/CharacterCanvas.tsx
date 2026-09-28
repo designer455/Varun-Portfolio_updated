@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface CharacterCanvasProps {
   className?: string;
@@ -29,8 +29,6 @@ function lerpAngle(current: number, target: number, factor: number): number {
 
 export default function CharacterCanvas({ className = "", onStateChange }: CharacterCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [loadProgress, setLoadProgress] = useState(0);
 
   // References for animation loop
   const framesRef = useRef<HTMLImageElement[]>([]);
@@ -44,7 +42,6 @@ export default function CharacterCanvas({ className = "", onStateChange }: Chara
   useEffect(() => {
     let mounted = true;
     const totalFrames = 128;
-    let loadedCount = 0;
     const images: HTMLImageElement[] = [];
 
     // Center frame
@@ -52,32 +49,18 @@ export default function CharacterCanvas({ className = "", onStateChange }: Chara
     centerImg.src = "/frames/center.webp";
     centerFrameRef.current = centerImg;
 
-    const checkAllLoaded = () => {
-      loadedCount++;
-      if (mounted) {
-        setLoadProgress(Math.round((loadedCount / (totalFrames + 1)) * 100));
-        if (loadedCount >= totalFrames) {
-          setIsLoaded(true);
-        }
-      }
-    };
-
     centerImg.onload = () => {
-      if (canvasRef.current) {
+      if (mounted && canvasRef.current) {
         const ctx = canvasRef.current.getContext("2d", { alpha: false });
         if (ctx) {
           ctx.drawImage(centerImg, 0, 0, 1280, 720);
         }
       }
-      checkAllLoaded();
     };
-    centerImg.onerror = checkAllLoaded;
 
     for (let i = 0; i < totalFrames; i++) {
       const img = new Image();
       img.src = `/frames/frame_${i}.webp`;
-      img.onload = checkAllLoaded;
-      img.onerror = checkAllLoaded;
       images.push(img);
     }
     framesRef.current = images;
@@ -249,15 +232,6 @@ export default function CharacterCanvas({ className = "", onStateChange }: Chara
           }}
         />
       </div>
-
-      {!isLoaded && (
-        <div className="absolute inset-0 bg-black flex flex-col items-center justify-center text-white/80 pointer-events-none transition-opacity duration-300 z-10">
-          <div className="w-10 h-10 rounded-full border-2 border-white/20 border-t-white animate-spin mb-3" />
-          <p className="text-xs uppercase tracking-widest font-mono text-white/70">
-            Loading Vision {loadProgress}%
-          </p>
-        </div>
-      )}
     </div>
   );
 }

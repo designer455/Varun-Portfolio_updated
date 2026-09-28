@@ -8,7 +8,6 @@ import pdfCoversManifest from "@/data/pdfCoversManifest.json";
 
 // Components
 import MagneticButton from "./MagneticButton";
-import AILabTeaser from "./AILabTeaser";
 
 // Lightbox
 import Lightbox from "yet-another-react-lightbox";
@@ -53,6 +52,25 @@ export default function Portfolio() {
       document.body.style.overflow = "";
     };
   }, [activePdf]);
+
+  // Listen for programmatic vault filter events (e.g. from JARVIS assistant)
+  useEffect(() => {
+    const handleSetVaultFilter = (e: Event) => {
+      const customEvent = e as CustomEvent<VaultFilterId>;
+      if (
+        customEvent.detail &&
+        VAULT_FILTERS.some((f) => f.id === customEvent.detail)
+      ) {
+        setSelectedFilter(customEvent.detail);
+        setVisibleCount(12);
+      }
+    };
+
+    window.addEventListener("set-vault-filter", handleSetVaultFilter);
+    return () => {
+      window.removeEventListener("set-vault-filter", handleSetVaultFilter);
+    };
+  }, []);
 
   // Compute real dynamic counts from verified project data
   const filterCounts = useMemo(() => {
@@ -383,33 +401,6 @@ export default function Portfolio() {
             )}
           </div>
 
-        </div>
-      </section>
-
-      {/* ========================================================
-          2. AI LAB GATEWAY & ARCHITECTURE SECTION
-      ======================================================== */}
-      <section
-        id="ailab"
-        className="py-20 sm:py-28 border-t border-white/10 bg-[#030712] relative overflow-hidden"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="mb-8">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="h-2 w-2 rounded-full bg-[#15803D]" />
-              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#CCFF00]">
-                RESEARCH & AUTONOMOUS CODE
-              </span>
-            </div>
-            <h3 className="text-2xl sm:text-4xl font-black font-display tracking-tight text-white uppercase">
-              AI LAB & MCP SYSTEMS
-            </h3>
-            <p className="mt-1 text-sm text-zinc-400 max-w-xl">
-              Exploring agentic intelligence, custom Model Context Protocol servers, and generative AI production pipelines.
-            </p>
-          </div>
-
-          <AILabTeaser />
         </div>
       </section>
 
